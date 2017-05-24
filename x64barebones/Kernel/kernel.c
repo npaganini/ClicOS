@@ -4,8 +4,11 @@
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 
+#include <interruptions.h>
 
 #include <driverVideo.h>
+
+#define TIMER 100000000
 
 
 extern uint8_t text;
@@ -84,9 +87,10 @@ void * initializeKernelBinary()
 	return getStackBase();
 }
 
+
 int main()
 {	
-	long timer = 100000000;
+	long timer = TIMER;
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
@@ -106,10 +110,25 @@ int main()
 
 	ncPrint("[Finished]");
 
+
 	// set IDT
-	// setIDT();
 	// set PIC mask
 	// set interruption (IDT) handlers
+	iSetHandler(0x20, (uint64_t) irq0Handler);
+	iSetHandler(0x21, (uint64_t) irq1Handler);
+	setPicMaster(0xFE);
+	sti();
+
+	// static int i = 0;
+	// char *video = (char *) 0xB8000;
+
+	// while (1) {
+	// 	int k = 0;
+	// 	while(k < 1000*1000*20) {
+	// 		k++;
+	// 	}
+	// 	ncPrintHex(i);
+	// }
 
 	while(timer) {
 		timer--;

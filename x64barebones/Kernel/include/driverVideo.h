@@ -9,5 +9,6 @@ void myNewLine();
 void welcomeMessage();
 void shell();
 void displayTime();
+int _sysTime(int date);
 
 #endif

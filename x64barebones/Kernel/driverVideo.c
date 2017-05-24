@@ -8,7 +8,6 @@
 #define MAX_INT 20
 #define GMT 3
 
-extern int _sysTime(int date);
 
 char* vidStart = (char *) 0xB8000;
 
