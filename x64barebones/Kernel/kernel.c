@@ -25,7 +25,6 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
-
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
 	memset(bssAddress, 0, bssSize);
@@ -116,7 +115,8 @@ int main()
 	// set interruption (IDT) handlers
 	iSetHandler(0x20, (uint64_t) irq0Handler);
 	iSetHandler(0x21, (uint64_t) irq1Handler);
-	setPicMaster(0xFE);
+	setPicMaster(0xFD);
+	// setPicSlave(0x0);
 	sti();
 
 	// static int i = 0;
@@ -138,10 +138,13 @@ int main()
 	clearScreen();
 
 	// welcome message
-
 	welcomeMessage();
-
 	clearScreen();
+
+	// keyboard_init();
+	while(1);
+
+	printOnScreen("Oh oh oh");
 
 	// shell();
 

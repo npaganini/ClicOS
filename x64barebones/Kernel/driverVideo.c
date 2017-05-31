@@ -15,11 +15,17 @@ static int pointer = 0;
 
 char ans[MAX_INT] = {0};
 
+void printOnScreenChar(char c) {
+	*(vidStart + pointer) = c;
+	*(vidStart + pointer + 1) = 0x07;
+	pointer += 2;
+}
+
 void printOnScreen(char* string) {
 	int i = 0;
 	while(string[i] != 0) {
-		*(vidStart+pointer) = string[i];
-		*(vidStart+pointer+1) = 0x07;
+		*(vidStart + pointer) = string[i];
+		*(vidStart + pointer + 1) = 0x07;
 		pointer += 2;
 		i++;
 	}

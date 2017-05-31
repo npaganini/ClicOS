@@ -8,6 +8,9 @@ void sti();
 void irq0Handler();
 void irq1Handler();
 void setPicMaster(uint16_t);
-char _keyboard();
+void keyboard_init(void);
+char read_port(unsigned short port);
+void write_port(unsigned short port, unsigned char data);
+void keyboard_handler(void);
 
 #endif

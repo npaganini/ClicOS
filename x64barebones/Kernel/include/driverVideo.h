@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+void printOnScreenChar(char c);
 void printOnScreen(char* string);
 void clearScreen();
 void myNewLine();

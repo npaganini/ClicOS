@@ -30,8 +30,8 @@ void iSetHandler(int index, uint64_t handler) {
 	IDT[index].zero_h = 0;	
 }
 
-static int i = 0;
-char *video = (char *) 0xB8000;
+// static int i = 0;
+// char *video = (char *) 0xB8000;
 	
 
 void tickHandler() {
@@ -40,9 +40,11 @@ void tickHandler() {
 }
 
 void keyboardHandler() {
+	// printOnScreen("Hola");	Entra aca correctamente 1 vez
 	// char c[] = {'a'};
-	// c[0] = (char)_keyboard();
+	// c[0] = (char)();
 	// printOnScreen(c);		// interruption not working... hay que arreglar el asm? el llamado a esta funcion?
+	keyboard_handler();
 }
 
 typedef void (*handler_t)(void);
