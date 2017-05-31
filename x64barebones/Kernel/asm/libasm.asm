@@ -45,14 +45,22 @@ setPicMaster:
 ;	ret
 
 read_port:
-	mov edx, [esp + 4]
+	push rbp
+	mov rbp, rsp
+	mov rdx, rdi
 	in al, dx
+	mov rsp, rbp
+	pop rbp
 	ret
 
 write_port:
-	mov edx, [esp + 4]
-	mov al, [esp + 4 + 4]
+	push rbp
+	mov rbp, rsp
+	mov rdx, rdi
+	mov rax, rsi
 	out dx, al
+	mov rsp, rbp
+	pop rbp
 	ret
 
 cpuVendor:
@@ -78,3 +86,4 @@ cpuVendor:
 	mov rsp, rbp
 	pop rbp
 	ret
+

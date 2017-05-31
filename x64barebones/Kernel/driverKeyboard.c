@@ -4,7 +4,7 @@
 
 
 static char KEYS_MAPPING[] = {0, 'ESC', '1', '2', '3', '4', '5', '6', '7', '8', '9', 			// 0 - 10
-									'0', '\'', '¿', 0, '    ', 'q', 'w', 'e', 'r', 't',// 11 - 20
+									'0', '\'', '¿', 'BACKSPACE', '    ', 'q', 'w', 'e', 'r', 't',// 11 - 20
 								  	'y', 'u', 'i', 'o', 'p', '´', '+', '\n', 0, 'a',			// 21 - 30
 									's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 0, '{', 			// 31 - 40
 								  	'|', 'SHIFT', '}', 'z', 'x', 'c', 'v', 'b', 'n', 'm',  		// 41 - 50
@@ -17,30 +17,41 @@ static char SHIFT_KEYS_MAPPING[] = {0, 'ESC', '!', '\0', '#', '$', '%', '&', '/'
 								  	'°', 'SHIFT', ']', 'Z', 'X', 'C', 'V', 'B', 'N', 'M',  		// 41 - 50
 								  	';', ':', '_', 0, '*', 0, ' ', 0, 0, 0};				// 51 - 60
 
-void keyboard_init(void) {
-	write_port(0x21, 0xFD);
-}
+static int shift = 0;
 
 void keyboard_handler(void) {
 	// unsigned char status;
 	char keycode;
 
+	// printOnScreen("Pepit");		// working correctly
+	// printOnScreenChar('o');		// working correctly
 
 
-	// // write End of Interrupt
-	// write_port(0x20, 0x20);
-
-	// status = read_port(0x64);	// polling?
 	keycode = read_port(0x60);
-	if(keycode < 0) {
-		return;
+
+	printOnScreenChar(keycode);
+	// if(keycode < 0) {
+	// 	return;
+	// }
+	switch(keycode) {
+		case 28: {
+			myNewLine();
+			break;
+		}
+		case 14: {
+			backspace();
+			break;
+		}
+		// case 42: {
+		// 	shift = 1;
+		// }
+		default: {
+			if(shift) {
+				printOnScreenChar(SHIFT_KEYS_MAPPING[keycode]);
+			} else {
+				printOnScreenChar(KEYS_MAPPING[keycode]);
+			}
+			break;
+		}
 	}
-	if(keycode == 28) {
-		myNewLine();
-	}
-	if(keycode == 17) {
-		printOnScreen("Pepito");
-	}
-	// if(keycode == SHIFT)
-	printOnScreenChar(KEYS_MAPPING[keycode]);
 }

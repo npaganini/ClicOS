@@ -11,5 +11,6 @@ void welcomeMessage();
 void shell();
 void displayTime();
 int _sysTime(int date);
+void backspace(void);
 
 #endif

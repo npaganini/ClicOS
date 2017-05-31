@@ -136,3 +136,9 @@ void shell() {
 	// }
 	printOnScreen("[User]$ ");
 }
+
+void backspace(void) {
+	pointer -= 2;
+	printOnScreen(" ");
+	pointer -= 2;
+}

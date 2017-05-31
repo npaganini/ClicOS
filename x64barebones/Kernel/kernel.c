@@ -24,6 +24,7 @@ static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
+void loading(void);
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
@@ -86,10 +87,16 @@ void * initializeKernelBinary()
 	return getStackBase();
 }
 
+void loading(void) {
+	long timer = TIMER;
+	while(timer) {
+		timer--;
+	}
+}
+
 
 int main()
 {	
-	long timer = TIMER;
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
@@ -109,6 +116,14 @@ int main()
 
 	ncPrint("[Finished]");
 
+	loading();
+
+	// print black screen
+	clearScreen();
+
+	// welcome message
+	welcomeMessage();
+	clearScreen();
 
 	// set IDT
 	// set PIC mask
@@ -119,32 +134,7 @@ int main()
 	// setPicSlave(0x0);
 	sti();
 
-	// static int i = 0;
-	// char *video = (char *) 0xB8000;
-
-	// while (1) {
-	// 	int k = 0;
-	// 	while(k < 1000*1000*20) {
-	// 		k++;
-	// 	}
-	// 	ncPrintHex(i);
-	// }
-
-	while(timer) {
-		timer--;
-	}
-
-	// print black screen
-	clearScreen();
-
-	// welcome message
-	welcomeMessage();
-	clearScreen();
-
-	// keyboard_init();
 	while(1);
-
-	printOnScreen("Oh oh oh");
 
 	// shell();
 
