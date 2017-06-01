@@ -3,7 +3,7 @@
 #define ROWS 25
 #define COLS 80
 
-#define TIMER 1000000000
+#define TIMER 100000000
 #define CENTERED 20
 #define MAX_INT 20
 #define GMT 3
@@ -46,6 +46,9 @@ void clearScreen() {
 }
 
 void myNewLine() {
+	if(pointer >= 2*ROWS*COLS && pointer <= 2*(ROWS-1)*COLS) {		// FIX THIS IF
+		scroll();
+	}
 	pointer = ((pointer / (COLS * 2)) + 1) * COLS * 2;
 }
 
@@ -144,15 +147,24 @@ void shell() {
 }
 
 void backspace(void) {
-	pointer -= 2;
-	printOnScreen(" ");
-	pointer -= 2;
+	if(pointer > 0) {
+		pointer -= 2;
+		printOnScreen(" ");
+		pointer -= 2;
+	}
 }
 
 void scroll(void) {
-
-	int i;
-	for( i=0; i<ROWS; i++ ) {
-
+	int ipointer, jpointer;
+	int end = (ROWS-1)*COLS*2;
+	for(ipointer = 0, jpointer = COLS*2; ipointer < end; ipointer++, jpointer+=2) {
+		*(vidStart + ipointer) = *(vidStart + jpointer);
+		ipointer++;
+		*(vidStart + ipointer) = 0x07;
 	}
+	for(ipointer = end; ipointer < (ROWS*COLS*2); ipointer += 2) {
+		*(ipointer + vidStart) = ' ';
+		*(ipointer + vidStart + 1) = 0x00;
+	}
+	pointer = end;
 }
