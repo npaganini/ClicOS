@@ -38,9 +38,13 @@ void keyboardHandler() {
 	keyboard_handler();		// in keyboard driver
 }
 
+void mouseHandler(){
+	mouse_handler();
+}
+
 typedef void (*handler_t)(void);
 
-handler_t handlers[] = {tickHandler, keyboardHandler};
+handler_t handlers[] = {tickHandler, keyboardHandler, mouseHandler};
 
 void irqDispatcher(int irq) {
 	handlers[irq]();

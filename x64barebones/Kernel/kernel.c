@@ -128,11 +128,15 @@ int main()
 	// set IDT
 	// set PIC mask
 	// set interruption (IDT) handlers
+	initalize_Mouse();
 	iSetHandler(0x20, (uint64_t) irq0Handler);
 	iSetHandler(0x21, (uint64_t) irq1Handler);
-	setPicMaster(0xFD);
+	iSetHandler(0x32, (uint64_t) irq2Handler);
+	setPicMaster(0xEFFD);
 	// setPicSlave(0x0);
 	sti();
+
+
 
 	while(1);
 
