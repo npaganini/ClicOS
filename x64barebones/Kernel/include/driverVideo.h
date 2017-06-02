@@ -12,5 +12,6 @@ void shell();
 void displayTime();
 int _sysTime(int date);
 void backspace(void);
+void scroll(void);
 
 #endif

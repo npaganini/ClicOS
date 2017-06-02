@@ -7,6 +7,7 @@
 #include <interruptions.h>
 
 #include <driverVideo.h>
+#include <driverMouse.h>
 
 #define TIMER 100000000
 
@@ -131,7 +132,7 @@ int main()
 	initalize_Mouse();
 	iSetHandler(0x20, (uint64_t) irq0Handler);
 	iSetHandler(0x21, (uint64_t) irq1Handler);
-	iSetHandler(0x32, (uint64_t) irq2Handler);
+	iSetHandler(0x32, (uint64_t) irq12Handler);
 	setPicMaster(0xEFFD);
 	// setPicSlave(0x0);
 	sti();

@@ -7,7 +7,7 @@ void iSetHandler(int index, uint64_t handler);
 void sti();
 void irq0Handler();
 void irq1Handler();
-void irq2Handler();
+void irq12Handler();
 void setPicMaster(uint16_t);
 void keyboard_init(void);
 char read_port(unsigned short port);
