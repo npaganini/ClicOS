@@ -139,11 +139,5 @@ int main()
 	setPicSlave(0xF);
 	sti();
 
-
-
-	while(1);
-
-	// shell();
-
-	return 0;
+	return terminal();
 }
