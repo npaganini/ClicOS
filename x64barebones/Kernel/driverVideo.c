@@ -1,14 +1,5 @@
 #include <driverVideo.h>
 
-#define ROWS 25
-#define COLS 80
-
-#define TIMER 100000000
-#define CENTERED 20
-#define MAX_INT 20
-#define GMT 3
-
-
 char* vidStart = (char *) 0xB8000;
 
 static int pointer = 0;

@@ -3,6 +3,14 @@
 
 #include <stdint.h>
 
+#define ROWS 25
+#define COLS 80
+
+#define TIMER 100000000
+#define CENTERED 20
+#define MAX_INT 20
+#define GMT 3
+
 void printOnScreenChar(char c);
 void printOnScreen(char* string);
 void clearScreen();
