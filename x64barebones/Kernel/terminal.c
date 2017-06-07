@@ -4,9 +4,9 @@
 int terminal(void) {
 	int exit = 0;
 	do {
-		printOnScreen("[User]$ ");
+		// printOnScreen("[User]$ ");
 		// stuff
-		exit = !exit;
+		// exit = !exit;
 	} while(!exit);
 	return !exit;
 }

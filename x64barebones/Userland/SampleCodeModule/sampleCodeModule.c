@@ -1,5 +1,3 @@
-#include <shell.h>
-
 int main() {
 /* sampleCodeModule.c */
 
