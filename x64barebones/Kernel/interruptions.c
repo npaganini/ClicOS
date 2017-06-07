@@ -38,13 +38,19 @@ void keyboardHandler() {
 	keyboard_handler();		// in keyboard driver
 }
 
-void mouseHandler(){
+void mouseHandler() {
 	mouse_handler();
+}
+
+void systemCallHandler() {
+	// systemCall_handler();
+	// acá debería identificar que quiere hacer y decirle a quien mandarle
+	// el write imprime en pantalla y le pasa lo escrito al buffer
 }
 
 typedef void (*handler_t)(void);
 
-handler_t handlers[] = {tickHandler, keyboardHandler, mouseHandler};
+handler_t handlers[] = {tickHandler, keyboardHandler, mouseHandler, systemCallHandler};
 
 void irqDispatcher(int irq) {
 	handlers[irq]();

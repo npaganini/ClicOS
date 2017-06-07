@@ -8,6 +8,7 @@ void sti();
 void irq0Handler();
 void irq1Handler();
 void irq12Handler();
+void irq80Handler();
 void setPicMaster(uint16_t);
 void setPicSlave(uint16_t);
 void keyboard_init(void);
