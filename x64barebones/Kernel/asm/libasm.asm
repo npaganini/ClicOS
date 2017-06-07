@@ -1,6 +1,7 @@
 GLOBAL cpuVendor
 GLOBAL sti
 GLOBAL setPicMaster
+GLOBAL setPicSlave
 GLOBAL irq0Handler
 GLOBAL irq1Handler
 GLOBAL irq12Handler:
@@ -37,16 +38,16 @@ setPicMaster:
 	pop rbp
 	ret
 
-;setPicSlave:
-;	push rbp
-;	mov rbp, rsp
-;
-;	mov rax, rdi
-;	out a1h, al
-;
-;	mov rsp, rbp
-;	pop rbp
-;	ret
+setPicSlave:
+	push rbp
+	mov rbp, rsp
+
+	mov rax, rdi
+	out 0xa1, al
+
+	mov rsp, rbp
+	pop rbp
+	ret
 
 read_port:
 	push rbp

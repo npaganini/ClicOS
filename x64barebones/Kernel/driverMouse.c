@@ -27,7 +27,7 @@ void mouse_wait(unsigned char type){
   }
 }
 
-void mouse_write(unsigned char a_write){
+void mouse_write(unsigned char a_write) {
 	//Wait to be able to send a command
 	mouse_wait(1);
 	//Tell the mouse we are sending a command
@@ -38,13 +38,13 @@ void mouse_write(unsigned char a_write){
 	write_port(0x60, a_write);
 }
 
-unsigned char mouse_read(){
+unsigned char mouse_read() {
 	//Get response from mouse
 	mouse_wait(0);
 	return read_port(0x60);
 }
 
-void initalize_Mouse(){
+void initialize_Mouse() {
 	//cuando prendo la computadora, el mouse esta desactivado
 	//y la informacion que proviene de el no va a generar interrupciones
 	//entonces debo activarlo
