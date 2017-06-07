@@ -138,8 +138,7 @@ int main()
 	// setPicMaster(0x0000);
 	setPicSlave(0xF);
 	sti();
-
-
+	draw_pixel(15,15,0x01);
 
 	while(1);
 

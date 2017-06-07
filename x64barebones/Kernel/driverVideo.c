@@ -28,6 +28,12 @@ void printOnScreen(char* string) {
 	}
 }
 
+void draw_pixel(int x, int y, int color){
+	int position= x*1 + y*80;
+	*(vidStart + position) = "m";
+	*(vidStart + position + 1) = 0x07;
+}
+
 void clearScreen() {
 	for(pointer = 0; pointer < (ROWS*COLS*2); pointer += 2) {
 		*(pointer+vidStart) = ' ';
@@ -37,7 +43,7 @@ void clearScreen() {
 }
 
 void myNewLine() {
-	if(pointer >= 2*ROWS*COLS && pointer <= 2*(ROWS-1)*COLS) {		// FIX THIS IF
+	if(pointer >= 2*ROWS*COLS && pointer <= 2*(ROWS-1)*COLS) {
 		scroll();
 	}
 	pointer = ((pointer / (COLS * 2)) + 1) * COLS * 2;

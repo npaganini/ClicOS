@@ -21,5 +21,5 @@ void displayTime();
 int _sysTime(int date);
 void backspace(void);
 void scroll(void);
-
+void draw_pixel(int x, int y, int color);
 #endif
