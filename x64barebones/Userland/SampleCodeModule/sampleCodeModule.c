@@ -19,7 +19,8 @@ int main() {
 	return 0xDEADBEEF;
 	*/
 	
-	shell();
+	// shell in terminal.c in Kernel
+	// I should make functions here?
 
 	return 0;
 }
