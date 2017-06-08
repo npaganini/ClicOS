@@ -18,23 +18,32 @@ static char SHIFT_KEYS_MAPPING[] = {0, 'ESC', '!', '\0', '#', '$', '%', '&', '/'
 								  	';', ':', '_', 0, '*', 0, ' ', 0, 0, 0};					// 51 - 60
 
 static int mayus = 0;
-static char buffer[20] = {0};
+static int bufferPlace = 0;
+static char buffer[ROWS*COLS] = {0};
 
 void keyboard_handler(void) {
 	int keycode;
 
 	keycode = read_port(0x60);
 
+	buffer[bufferPlace] = keycode;
+
 	if(keycode >= 0 &&  keycode < MAX_KEYPRESSED) {
 		switch(keycode) {
 			case 14:
-				backspace();
+				if(buffer[bufferPlace-1] == 28) {
+					backspace(1);
+				}
+				backspace(0);
+				bufferPlace--;
 				break;
 			case 15:
 				printOnScreen("    ");
+				bufferPlace++;
 				break;
 			case 28:
 				myNewLine();
+				bufferPlace++;
 				break;
 			case 29:
 			case 42:
@@ -43,6 +52,7 @@ void keyboard_handler(void) {
 				} else {
 					mayus = 1;
 				}
+				bufferPlace++;
 				break;
 			default:
 				if(mayus) {
@@ -50,6 +60,7 @@ void keyboard_handler(void) {
 				} else {
 					printOnScreenChar(KEYS_MAPPING[keycode]);
 				}
+				bufferPlace++;
 				break;
 		}
 	}

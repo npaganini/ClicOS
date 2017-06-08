@@ -30,7 +30,7 @@ void printOnScreen(char* string) {
 
 void draw_pixel(int x, int y, int color){
 	int position= x*1 + y*80;
-	*(vidStart + position) = "m";
+	*(vidStart + position) = 'm';
 	*(vidStart + position + 1) = 0x07;
 }
 
@@ -135,19 +135,22 @@ void welcomeMessage() {
 	}
 }
 
-void shell() {
-	printOnScreen("Presione una tecla para continuar: ");
-	// while(1) {
-	// 	;
-	// }
-	printOnScreen("[User]$ ");
-}
-
-void backspace(void) {
+void backspace(int newline) {
 	if(pointer > 0) {
-		pointer -= 2;
-		printOnScreen(" ");
-		pointer -= 2;
+		switch(newline) {
+			case 0:
+				pointer -= 2;
+				printOnScreen(" ");
+				pointer -= 2;
+				break;
+			case 1:
+				do {
+					pointer -= 4;
+				} while((pointer > 0) && (*(vidStart + pointer) == ' '));
+				break;
+			default:
+				break;
+		}
 	}
 }
 
