@@ -140,6 +140,8 @@ int main()
 	sti();
 	draw_pixel(15,15,0x01);
 
+	terminal();
+
 	while(1);
 
 	// shell();
