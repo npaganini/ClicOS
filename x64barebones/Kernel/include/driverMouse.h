@@ -1,5 +1,5 @@
-#ifndef _INTERRUPTIONS_H_
-#define _INTERRUPTIONS_H_
+#ifndef _DRIVERMOUSE_H_
+#define _DRIVERMOUSE_H_
 
 void initialize_Mouse(void);
 void mouse_wait(unsigned char type);

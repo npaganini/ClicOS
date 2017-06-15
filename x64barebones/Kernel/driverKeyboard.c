@@ -29,39 +29,45 @@ void keyboard_handler(void) {
 	buffer[bufferPlace] = keycode;
 
 	if(keycode >= 0 &&  keycode < MAX_KEYPRESSED) {
-		switch(keycode) {
-			case 14:
-				if(buffer[bufferPlace-1] == 28) {
-					backspace(1);
-				}
-				backspace(0);
+		if(keycode == 14) {
+			if(buffer[bufferPlace-1] == 28) {
+				backspace(1);
+			}
+			backspace(0);
+			if(bufferPlace == 0) {
+				bufferPlace = ROWS * COLS - 1;
+			} else {
 				bufferPlace--;
-				break;
-			case 15:
-				printOnScreen("    ");
+			}
+		} else {
+			switch(keycode) {
+				case 15:
+					printOnScreen("    ");
+					break;
+				case 28:
+					myNewLine();
+					break;
+				case 29:
+				case 42:
+					if(mayus) {
+						mayus = 0;
+					} else {
+						mayus = 1;
+					}
+					break;
+				default:
+					if(mayus) {
+						printOnScreenChar(SHIFT_KEYS_MAPPING[keycode]);
+					} else {
+						printOnScreenChar(KEYS_MAPPING[keycode]);
+					}
+					break;
+			}
+			if(bufferPlace == (ROWS * COLS - 1)) {
+				bufferPlace = 0;
+			} else {
 				bufferPlace++;
-				break;
-			case 28:
-				myNewLine();
-				bufferPlace++;
-				break;
-			case 29:
-			case 42:
-				if(mayus) {
-					mayus = 0;
-				} else {
-					mayus = 1;
-				}
-				bufferPlace++;
-				break;
-			default:
-				if(mayus) {
-					printOnScreenChar(SHIFT_KEYS_MAPPING[keycode]);
-				} else {
-					printOnScreenChar(KEYS_MAPPING[keycode]);
-				}
-				bufferPlace++;
-				break;
+			}
 		}
 	}
 }

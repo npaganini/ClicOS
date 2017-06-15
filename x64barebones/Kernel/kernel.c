@@ -8,6 +8,7 @@
 
 #include <driverVideo.h>
 #include <driverMouse.h>
+#include <terminal.h>
 
 #define TIMER 100000000
 

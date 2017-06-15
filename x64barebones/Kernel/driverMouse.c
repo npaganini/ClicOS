@@ -1,6 +1,11 @@
 #include <interruptions.h>
 #include <driverVideo.h>
 
+static int mouse_cycle = 0; // unsigned char
+static int mouse_byte[3];   // signed char
+static int mouse_x = 0;     // signed char
+static int mouse_y = 0;     // signed char
+
 void mouse_wait(unsigned char type){
   unsigned int _time_out=100000;
   if(type==0)
@@ -99,4 +104,5 @@ void mouse_handler(){
     // do what you want here, just replace the puts's to execute an action for each button
     // to use the coordinate data, use mouse_bytes[1] for delta-x, and mouse_bytes[2] for delta-y
   }
+  printOnScreen("Leaving mouse handler...");
 }

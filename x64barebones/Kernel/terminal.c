@@ -1,12 +1,11 @@
 #include <terminal.h>
 #include <driverVideo.h>
 
-int terminal(void) {
+void terminal(void) {
 	int exit = 0;
 	do {
-		// printOnScreen("[User]$ ");
-		// stuff
-		// exit = !exit;
+		printOnScreen("[User]$ ");
+		while(1);
 	} while(!exit);
 	return !exit;
 }
