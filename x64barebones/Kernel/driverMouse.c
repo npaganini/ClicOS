@@ -118,24 +118,19 @@ static int mouse_x = 0;     // signed char
 static int mouse_y = 0;     // signed char
 
 void mouse_wait(unsigned char type){
-  unsigned int _time_out=100000;
-  if(type==0)
-  {
-    while(_time_out--) //Data
-    {
-      if((read_port(0x64) & 1)==1)
-      {
+  unsigned int _time_out = 100000;
+  if(type == 0) {
+    while(_time_out--) { //Data
+      if((read_port(0x64) & 1) == 1) {
+      // if((read_port(0x64) & 0x0B1) == 1) {
         return;
       }
     }
     return;
-  }
-  else
-  {
-    while(_time_out--) //Signal
-    {
-      if((read_port(0x64) & 2)==0)
-      {
+  } else {
+    while(_time_out--) { //Signal
+      if((read_port(0x64) & 2) == 0) {
+      // if((read_port(0x64) & 0x0B10) == 1) {
         return;
       }
     }
@@ -195,20 +190,22 @@ void mouse_handler(){
   // printOnScreen("Mouse handler...");
   mouse_bytes[cycle] = read_port(0x60);
   if(cycle == 0){
-    if(mouse_bytes[0] && 0x80 || mouse_bytes[0] && 0x40){
-      cycle=-1;
+    if(mouse_bytes[0] && 0x80 || mouse_bytes[0] && 0x40) {
+      cycle = -1;
     }
-  }
-  else if (cycle == 2) {
+  } else if (cycle == 2) {
     char leftClickPressed = 0;
     char rightClickPressed = 0;
     cycle = -1;
-    if (mouse_bytes[0] & 0x4)
+    if (mouse_bytes[0] & 0x4) {
       printOnScreen("Middle button is pressed!");
-    if (mouse_bytes[0] & 0x2)
+    }
+    if (mouse_bytes[0] & 0x2) {
       printOnScreen("Right button is pressed!");
-    if (mouse_bytes[0] & 0x1)
+    }
+    if (mouse_bytes[0] & 0x1) {
       printOnScreen("Left button is pressed!");
+    }
     // do what you want here, just replace the puts's to execute an action for each button
     // to use the coordinate data, use mouse_bytes[1] for delta-x, and mouse_bytes[2] for delta-y
   }
