@@ -111,6 +111,7 @@
 
 #include <interruptions.h>
 #include <driverVideo.h>
+#include <driverMouse.h>
 
 static int cycle = 0; // unsigned char
 static char mouse_bytes[3];   // signed char
@@ -122,7 +123,7 @@ void mouse_wait(unsigned char type){
   if(type == 0) {
     while(_time_out--) { //Data
       if((read_port(0x64) & 1) == 1) {
-      // if((read_port(0x64) & 0x0B1) == 1) {
+      // if((read_port(0x64) & 0x0b1) == 1) {
         return;
       }
     }
@@ -130,7 +131,7 @@ void mouse_wait(unsigned char type){
   } else {
     while(_time_out--) { //Signal
       if((read_port(0x64) & 2) == 0) {
-      // if((read_port(0x64) & 0x0B10) == 1) {
+      // if((read_port(0x64) & 0x0b10) == 1) {
         return;
       }
     }
@@ -186,25 +187,32 @@ void initialize_Mouse() {
 }
 
 
-void mouse_handler(){
+void mouse_handler() {
   // printOnScreen("In-");
   mouse_bytes[cycle] = read_port(0x60);
   if(cycle == 0){
-    if(mouse_bytes[0] && 0x80 || mouse_bytes[0] && 0x40) {
+    // printOnScreen("cycle es cero@");
+    if((mouse_bytes[0] & 0x80) || (mouse_bytes[0] & 0x40)) {
       cycle = -1;
+      // printOnScreen("cycle es -1");
     }
   } else if (cycle == 2) {
+    // printOnScreen("YYYYYYYY");
     char leftClickPressed = 0;
     char rightClickPressed = 0;
+    char wheelClickPressed = 0;
     cycle = -1;
     if (mouse_bytes[0] & 0x4) {
-      printOnScreen("Middle button is pressed!");
+      // printOnScreen("Middle button is pressed!");
+      wheelClickPressed = 1;
     }
     if (mouse_bytes[0] & 0x2) {
-      printOnScreen("Right button is pressed!");
+      // printOnScreen("Right button is pressed!");
+      rightClickPressed = 1;
     }
     if (mouse_bytes[0] & 0x1) {
-      printOnScreen("Left button is pressed!");
+      // printOnScreen("Left button is pressed!");
+      leftClickPressed = 1;
     }
     // do what you want here, just replace the puts's to execute an action for each button
     // to use the coordinate data, use mouse_bytes[1] for delta-x, and mouse_bytes[2] for delta-y

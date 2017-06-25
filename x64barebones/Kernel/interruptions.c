@@ -60,7 +60,7 @@ void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene q
 			printOnScreen(s);
 			break;
 		default:
-			printOnScreen("Fail.");
+			printOnScreen("Wrong.");
 			break;
 	}
 }
