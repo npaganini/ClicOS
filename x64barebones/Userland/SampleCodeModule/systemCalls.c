@@ -1,13 +1,14 @@
 #include "include/systemCalls.h"
 
-uint64_t read(int fd, char * s, int sSize) {
-	return systemCall(READ, fd, sSize, (uint64_t) s);
+uint64_t read(char * s, int sSize) {
+	return systemCall(READ, sSize, (uint64_t) s);
 }
 
-uint64_t write(int fd, char * s, int sSize) {
-	return systemCall(WRITE, fd, sSize, (uint64_t) s);
+uint64_t write(char * s) {
+	// printOnScreen("Huh");
+	return systemCall(WRITE, 0, (uint64_t) s);
 }
 
-uint64_t time(int fd, char * s, int sSize) {
-	return systemCall(TIME, fd, 0, 0);
+uint64_t time() {
+	return systemCall(TIME, 0, 0);
 }

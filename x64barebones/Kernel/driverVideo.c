@@ -147,6 +147,7 @@ void backspace(int newline) {
 				do {
 					pointer -= 4;
 				} while((pointer > 0) && (*(vidStart + pointer) == ' '));
+				pointer += 6;
 				break;
 			default:
 				break;

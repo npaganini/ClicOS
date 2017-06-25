@@ -1,7 +1,9 @@
 #include "include/lib.h"
+#include "include/systemCalls.h"
 
 void printf(char * s) {
 	// systemCall a write
+	write(s);
 }
 
 int scanf(void) {
@@ -19,8 +21,11 @@ int getChar(void) {
 	return 0;
 }
 
-int strcmp(char * s) {
+int strcmp(char * s1, char * s2) {
 	do {
-		//
-	} while(*s != '\n');
+		if(*s1 != *s2) {
+			return 0;
+		}
+	} while(*s1 != '\n' && *s2 != '\n');
+	return 1;
 }

@@ -41,11 +41,11 @@
 	mov rdi, %1
 	call irqDispatcher
 
-	cmp rdi, 2
-	jne .notMouse
-	mov al, 0xa0	; EOI PIC SLAVE
-	out 20h, al
-.notMouse:
+	; cmp rdi, 2
+	; jne .notMouse
+	; mov al, 0xa0	; EOI PIC SLAVE
+	; out 20h, al
+; .notMouse:
 	mov al, 20h		; EOI PIC MASTER
 	out 20h, al
 	

@@ -1,5 +1,6 @@
 #include <interruptions.h>
 #include <driverVideo.h>
+#include <driverKeyboard.h>
 
 #pragma pack(push)
 #pragma pack(1)
@@ -31,7 +32,7 @@ void iSetHandler(int index, uint64_t handler) {
 }
 
 void tickHandler() {
-	// Here would go (jump to the interrupt attention routine) the Scheduler to swap between tasks to run.
+	// Here would go (jump to the interrupt attention routine) the Scheduler to swap between tasks to run. Not part of this project.
 }
 
 void keyboardHandler() {
@@ -42,10 +43,24 @@ void mouseHandler() {
 	mouse_handler();
 }
 
-void systemCallHandler() {
-	// systemCall_handler();
+void systemCallHandler(int instruction, char * s, int sSize) {
 	// acá debería identificar que quiere hacer y decirle a quien mandarle
 	// el write imprime en pantalla y le pasa lo escrito al buffer
+	switch(instruction) {
+		case TIME:
+			displayTime();
+			break;
+		case READ:
+			// read con strcpy del buffer de driverKeyboard
+			// return lo que te da el strcpy
+			break;
+		case WRITE:
+			printOnScreen("Funciona!");
+			printOnScreen(s);
+			break;
+		default:
+			break;
+	}
 }
 
 typedef void (*handler_t)(void);
@@ -53,5 +68,21 @@ typedef void (*handler_t)(void);
 handler_t handlers[] = {tickHandler, keyboardHandler, mouseHandler, systemCallHandler};
 
 void irqDispatcher(int irq) {
-	handlers[irq]();
+	switch(irq) {
+		case 0:
+			handlers[0]();
+			break;
+		case 1:
+			handlers[1]();
+			break;
+		case 12:
+			handlers[2]();
+			break;
+		case 16:
+			handlers[3]();
+			break;
+		default:
+			printOnScreen("Nope");
+			break;
+	}
 }

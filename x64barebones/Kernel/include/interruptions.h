@@ -3,12 +3,29 @@
 
 #include <stdint.h>
 
+#define TIME  0
+#define READ  1
+#define WRITE 2
+
 void iSetHandler(int index, uint64_t handler);
 void sti();
-void irq0Handler();
-void irq1Handler();
-void irq12Handler();
-void irq80Handler();
+uint64_t irq0Handler();
+uint64_t irq1Handler();
+uint64_t irq2Handler();
+uint64_t irq3Handler();
+uint64_t irq4Handler();
+uint64_t irq5Handler();
+uint64_t irq6Handler();
+uint64_t irq7Handler();
+uint64_t irq8Handler();
+uint64_t irq9Handler();
+uint64_t irq10Handler();
+uint64_t irq11Handler();
+uint64_t irq12Handler();
+uint64_t irq13Handler();
+uint64_t irq14Handler();
+uint64_t irq15Handler();
+uint64_t irq80Handler();
 void setPicMaster(uint16_t);
 void setPicSlave(uint16_t);
 void keyboard_init(void);

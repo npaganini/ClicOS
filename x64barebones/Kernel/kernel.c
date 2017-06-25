@@ -133,11 +133,24 @@ int main()
 	initialize_Mouse();
 	iSetHandler(0x20, (uint64_t) irq0Handler);
 	iSetHandler(0x21, (uint64_t) irq1Handler);
+	iSetHandler(0x22, (uint64_t) irq2Handler);
+	iSetHandler(0x23, (uint64_t) irq3Handler);
+	iSetHandler(0x24, (uint64_t) irq4Handler);
+	iSetHandler(0x25, (uint64_t) irq5Handler);
+	iSetHandler(0x26, (uint64_t) irq6Handler);
+	iSetHandler(0x27, (uint64_t) irq7Handler);
+	iSetHandler(0x28, (uint64_t) irq8Handler);
+	iSetHandler(0x29, (uint64_t) irq9Handler);
+	iSetHandler(0x2A, (uint64_t) irq10Handler);
+	iSetHandler(0x2B, (uint64_t) irq11Handler);
 	iSetHandler(0x2C, (uint64_t) irq12Handler);
+	iSetHandler(0x2D, (uint64_t) irq13Handler);
+	iSetHandler(0x2E, (uint64_t) irq14Handler);
+	iSetHandler(0x2F, (uint64_t) irq15Handler);
 	iSetHandler(0x80, (uint64_t) irq80Handler);
 	setPicMaster(0xF9);
 	// setPicMaster(0x0000);
-	setPicSlave(0xF);
+	setPicSlave(0xEF);
 	sti();
 	draw_pixel(15,15,0x01);
 

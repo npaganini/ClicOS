@@ -4,7 +4,20 @@ GLOBAL setPicMaster
 GLOBAL setPicSlave
 GLOBAL irq0Handler
 GLOBAL irq1Handler
+GLOBAL irq2Handler
+GLOBAL irq3Handler
+GLOBAL irq4Handler
+GLOBAL irq5Handler
+GLOBAL irq6Handler
+GLOBAL irq7Handler
+GLOBAL irq8Handler
+GLOBAL irq9Handler
+GLOBAL irq10Handler
+GLOBAL irq11Handler
 GLOBAL irq12Handler
+GLOBAL irq13Handler
+GLOBAL irq14Handler
+GLOBAL irq15Handler
 GLOBAL irq80Handler
 GLOBAL read_port
 GLOBAL write_port
@@ -21,11 +34,50 @@ irq0Handler:
 irq1Handler:
 	irqHandler 1
 
-irq12Handler:
+irq2Handler:
 	irqHandler 2
 
-irq80Handler:
+irq3Handler:
 	irqHandler 3
+
+irq4Handler:
+	irqHandler 4
+
+irq5Handler:
+	irqHandler 5
+
+irq6Handler:
+	irqHandler 6
+
+irq7Handler:
+	irqHandler 7
+
+irq8Handler:
+	irqHandler 8
+
+irq9Handler:
+	irqHandler 9
+
+irq10Handler:
+	irqHandler 10
+
+irq11Handler:
+	irqHandler 11
+
+irq12Handler:
+	irqHandler 12
+
+irq13Handler:
+	irqHandler 13
+
+irq14Handler:
+	irqHandler 14
+
+irq15Handler:
+	irqHandler 15
+
+irq80Handler:
+	irqHandler 16
 
 sti:
 	sti
