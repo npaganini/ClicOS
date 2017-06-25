@@ -185,6 +185,8 @@ int main()
 	ncPrint("[Finished]");
 	*/
 
+	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
+
 	EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
 	// EntryPoint userGuest = (EntryPoint) sampleCodeModuleAddress;
 
@@ -208,11 +210,11 @@ int main()
 	sti();
 	// draw_pixel(15,15,0x01);
 
-	change();
+	// change();
 
 	// terminal();
 
-	// sampleCodeModule();
+	sampleCodeModule();
 
 	while(1);
 

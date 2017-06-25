@@ -187,7 +187,7 @@ void initialize_Mouse() {
 
 
 void mouse_handler(){
-  // printOnScreen("Mouse handler...");
+  // printOnScreen("In-");
   mouse_bytes[cycle] = read_port(0x60);
   if(cycle == 0){
     if(mouse_bytes[0] && 0x80 || mouse_bytes[0] && 0x40) {
@@ -210,7 +210,7 @@ void mouse_handler(){
     // to use the coordinate data, use mouse_bytes[1] for delta-x, and mouse_bytes[2] for delta-y
   }
   cycle++;
-  // printOnScreen("Leaving mouse handler...");
+  // printOnScreen("Out;");
 }
 
 // void printCursor (uint8_t mouse_x, uint8_t mouse_y, char mouseLeftClickPressed){
