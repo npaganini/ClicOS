@@ -13,4 +13,3 @@ _sysTime:
 	mov rsp, rbp
 	pop rbp
 	ret
-

@@ -2,10 +2,14 @@
 #include <driverVideo.h>
 
 void terminal(void) {
-	int exit = 0;
-	do {
-		printOnScreen("[User]$ ");
-		while(1);
-	} while(!exit);
-	return !exit;
+	// pick user / samplecodemodule
+	displayWelcomeMsg();
+
+	// EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
+	// EntryPoint userGuest = (EntryPoint) sampleCodeModuleAddress;
+
+}
+
+void displayWelcomeMsg(void) {
+	printOnScreen("Please select the module to run:");
 }

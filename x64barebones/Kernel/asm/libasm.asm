@@ -65,7 +65,18 @@ irq11Handler:
 	irqHandler 11
 
 irq12Handler:
-	irqHandler 12
+	pushaq
+
+	mov rdi, 12
+	call irqDispatcher
+
+	mov al, 20h
+	out 0xA0, al	; EOI PIC SLAVE
+	out 20h, al		; EOI PIC MASTER
+
+	popaq
+
+	iretq
 
 irq13Handler:
 	irqHandler 13
@@ -99,7 +110,7 @@ setPicSlave:
 	mov rbp, rsp
 
 	mov rax, rdi
-	out 0xa1, al
+	out 0xA1, al
 
 	mov rsp, rbp
 	pop rbp

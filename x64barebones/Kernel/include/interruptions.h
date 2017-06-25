@@ -8,6 +8,7 @@
 #define WRITE 2
 
 void iSetHandler(int index, uint64_t handler);
+void setIDT();
 void sti();
 uint64_t irq0Handler();
 uint64_t irq1Handler();
@@ -33,6 +34,11 @@ char read_port(unsigned short port);
 void write_port(unsigned short port, unsigned char data);
 void keyboard_handler(void);
 void mouse_handler(void);
+void systemCallHandler(int instruction, char * s, int sSize);
 void initialize_Mouse(void);
+
+
+void change(void);
+void map_page(void * physicalAddress, void * virtualAddress);
 
 #endif

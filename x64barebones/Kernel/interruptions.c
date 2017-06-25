@@ -43,7 +43,7 @@ void mouseHandler() {
 	mouse_handler();
 }
 
-void systemCallHandler(int instruction, char * s, int sSize) {
+void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene que recibir void segun la declaracion de handler_t
 	// acá debería identificar que quiere hacer y decirle a quien mandarle
 	// el write imprime en pantalla y le pasa lo escrito al buffer
 	switch(instruction) {
@@ -51,7 +51,7 @@ void systemCallHandler(int instruction, char * s, int sSize) {
 			displayTime();
 			break;
 		case READ:
-			// read con strcpy del buffer de driverKeyboard
+			// TODO: read con strcpy del buffer de driverKeyboard
 			// return lo que te da el strcpy
 			break;
 		case WRITE:
@@ -65,7 +65,7 @@ void systemCallHandler(int instruction, char * s, int sSize) {
 
 typedef void (*handler_t)(void);
 
-handler_t handlers[] = {tickHandler, keyboardHandler, mouseHandler, systemCallHandler};
+handler_t handlers[] = {tickHandler, keyboardHandler, mouseHandler};
 
 void irqDispatcher(int irq) {
 	switch(irq) {
@@ -78,11 +78,28 @@ void irqDispatcher(int irq) {
 		case 12:
 			handlers[2]();
 			break;
-		case 16:
-			handlers[3]();
-			break;
 		default:
-			printOnScreen("Nope");
+			// printOnScreen("Nope");
 			break;
 	}
+}
+
+void setIDT() {
+	iSetHandler(0x20, (uint64_t) irq0Handler);
+	iSetHandler(0x21, (uint64_t) irq1Handler);
+	iSetHandler(0x22, (uint64_t) irq2Handler);
+	iSetHandler(0x23, (uint64_t) irq3Handler);
+	iSetHandler(0x24, (uint64_t) irq4Handler);
+	iSetHandler(0x25, (uint64_t) irq5Handler);
+	iSetHandler(0x26, (uint64_t) irq6Handler);
+	iSetHandler(0x27, (uint64_t) irq7Handler);
+	iSetHandler(0x28, (uint64_t) irq8Handler);
+	iSetHandler(0x29, (uint64_t) irq9Handler);
+	iSetHandler(0x2A, (uint64_t) irq10Handler);
+	iSetHandler(0x2B, (uint64_t) irq11Handler);
+	iSetHandler(0x2C, (uint64_t) irq12Handler);
+	iSetHandler(0x2D, (uint64_t) irq13Handler);
+	iSetHandler(0x2E, (uint64_t) irq14Handler);
+	iSetHandler(0x2F, (uint64_t) irq15Handler);
+	iSetHandler(0x80, (uint64_t) irq80Handler);
 }

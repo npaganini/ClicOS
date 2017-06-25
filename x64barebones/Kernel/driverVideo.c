@@ -61,6 +61,18 @@ char* intToChar(int n) {
 	return ans;
 }
 
+char* longToChar(unsigned long n) {
+	unsigned long i;
+	char aux[MAX_LONG] = {0};
+	for(i = 0; i < 2; i++) {
+		aux[i] = (n % 10) + '0';
+		n /= 10;
+	}
+	for(i = 0; i < 2; i++)
+		ans[i] = aux[1-i];
+	return ans;
+}
+
 void displayTime() {
 	// BCD where 57 means [0101|0111] which is 87
 	// int secs = 0;

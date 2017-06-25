@@ -9,6 +9,7 @@
 #define TIMER 100000000
 #define CENTERED 20
 #define MAX_INT 20
+#define MAX_LONG 50
 #define GMT 3
 
 void printOnScreenChar(char c);
@@ -21,6 +22,7 @@ void displayTime();
 int _sysTime(int date);
 void backspace(int newline);
 void scroll(void);
+char* longToChar(unsigned long n);
 void draw_pixel(int x, int y, int color);
 
 #endif
