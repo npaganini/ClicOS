@@ -23,6 +23,7 @@ GLOBAL read_port
 GLOBAL write_port
 
 EXTERN irqDispatcher
+EXTERN systemCallReceiver
 
 %include "./asm/macros.m"
 
@@ -88,7 +89,10 @@ irq15Handler:
 	irqHandler 15
 
 irq80Handler:
-	irqHandler 16
+	pushaq
+	call systemCallReceiver
+	popaq
+	iretq
 
 sti:
 	sti

@@ -3,13 +3,16 @@
 
 int shell(void) {
 	int exit = 0;
-	printf("hola\n");
-	// getInput();
-	// exit = processCommand();
-	while(1) {
-		printf("chau\n");
+	// int pepito = 0;
+	// pepito = printf("hola\n");
+	while(!exit) {
+		printf("[SCM]$ ");
+		printf("Still good");
+		getInput();
+		exit = processCommand();
 	}
 	return !exit;
+	// return pepito;
 }
 
 void getInput(void) {
@@ -18,12 +21,13 @@ void getInput(void) {
 	// implements scanf
 }
 
-void processCommand(void) {
+int processCommand(void) {
 	// implements strcmp
+	return 0;
 }
 
 void helpMenu(void) {
-	printf("Los comandos reconocidos son\n");
+	printf("Los comandos reconocidos son:\n");
 	printf("clear:             Limpia la pantalla.\n");
 	printf("echo [mensaje]:    Muestra el mensaje.\n");
 	printf("time:              Muestra la hora actual.\n");

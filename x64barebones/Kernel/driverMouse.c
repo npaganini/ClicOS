@@ -160,7 +160,6 @@ void initialize_Mouse() {
   //cuando prendo la computadora, el mouse esta desactivado
   //y la informacion que proviene de el no va a generar interrupciones
   //entonces debo activarlo
-  printOnScreen("Inicializando el mouse...");
   unsigned char status;
 
   mouse_wait(1); //espera hasta que el mouse pueda enviar/recibir comandos/data
@@ -188,37 +187,37 @@ void initialize_Mouse() {
 
 
 void mouse_handler() {
-  // printOnScreen("In-");
+  printOnScreen("In-");
   mouse_bytes[cycle] = read_port(0x60);
   if(cycle == 0){
-    // printOnScreen("cycle es cero@");
+    printOnScreen("cycle es cero@");
     if((mouse_bytes[0] & 0x80) || (mouse_bytes[0] & 0x40)) {
       cycle = -1;
-      // printOnScreen("cycle es -1");
+      printOnScreen("cycle es -1");
     }
   } else if (cycle == 2) {
-    // printOnScreen("YYYYYYYY");
+    printOnScreen("YYYYYYYY");
     char leftClickPressed = 0;
     char rightClickPressed = 0;
     char wheelClickPressed = 0;
     cycle = -1;
     if (mouse_bytes[0] & 0x4) {
-      // printOnScreen("Middle button is pressed!");
+      printOnScreen("Middle button is pressed!");
       wheelClickPressed = 1;
     }
     if (mouse_bytes[0] & 0x2) {
-      // printOnScreen("Right button is pressed!");
+      printOnScreen("Right button is pressed!");
       rightClickPressed = 1;
     }
     if (mouse_bytes[0] & 0x1) {
-      // printOnScreen("Left button is pressed!");
+      printOnScreen("Left button is pressed!");
       leftClickPressed = 1;
     }
     // do what you want here, just replace the puts's to execute an action for each button
     // to use the coordinate data, use mouse_bytes[1] for delta-x, and mouse_bytes[2] for delta-y
   }
   cycle++;
-  // printOnScreen("Out;");
+  printOnScreen("Out;");
 }
 
 // void printCursor (uint8_t mouse_x, uint8_t mouse_y, char mouseLeftClickPressed){

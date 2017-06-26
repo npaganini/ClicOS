@@ -164,7 +164,7 @@ void change(void) {
 
 int main()
 {
-	/*
+	/*/
 	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
@@ -183,7 +183,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-	*/
+	/**/
 
 	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
 
@@ -208,13 +208,18 @@ int main()
 	// setPicMaster(0x0000);
 	setPicSlave(0xEF);
 	sti();
-	// draw_pixel(15,15,0x01);
 
 	// change();
 
 	// terminal();
 
+	// int mhm = 0;
+	// mhm = sampleCodeModule();
 	sampleCodeModule();
+
+	// if(!mhm) {
+	// 	printOnScreen("llega a printf");
+	// }
 
 	while(1);
 

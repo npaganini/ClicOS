@@ -1,13 +1,14 @@
 #include "include/lib.h"
 #include "include/systemCalls.h"
 
-void printf(char * s) {
-	// systemCall a write
-	write(s);
+int printf(char * s) {
+	return write(s);
 }
 
 int scanf(void) {
 	// systemCall a read
+	char buffer[50] = {0};
+	read(buffer);
 	return 0;
 }
 

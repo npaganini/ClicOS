@@ -20,6 +20,8 @@ static char SHIFT_KEYS_MAPPING[] = {0, 'ESC', '!', '\0', '#', '$', '%', '&', '/'
 static int mayus = 0;
 static int bufferPlace = 0;
 static char buffer[ROWS*COLS] = {0};
+buffer[bufferPlace] = 28;
+bufferPlace++;
 
 void keyboard_handler(void) {
 	int keycode;
@@ -70,4 +72,26 @@ void keyboard_handler(void) {
 			}
 		}
 	}
+}
+
+char auxCopy[50] = {0};
+
+void strcpy(char * s) {
+	int i = 0;
+	do {
+			auxCopy[i] = SHIFT_KEYS_MAPPING[buffer[bufferPlace - i]];
+		i++;
+		if(i > 49) {
+			return;
+		}
+	} while(buffer[bufferPlace - i] != 28);
+	*(s+i+1) = 0;
+	while(*(s+i) != '\n') {
+		*(s+i) = auxCopy[i];
+		i--;
+		if(i < 0) {
+			return;
+		}
+	}
+	return strCopy;
 }

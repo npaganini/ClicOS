@@ -4,10 +4,8 @@
 void terminal(void) {
 	// pick user / samplecodemodule
 	displayWelcomeMsg();
-
 	// EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
 	// EntryPoint userGuest = (EntryPoint) sampleCodeModuleAddress;
-
 }
 
 void displayWelcomeMsg(void) {

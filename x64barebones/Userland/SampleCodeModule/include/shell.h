@@ -3,7 +3,7 @@
 
 int shell(void);
 void getInput(void);
-void processCommand(void);
+int processCommand(void);
 void helpMenu(void);
 
 #endif
