@@ -15,7 +15,7 @@ int shell(void) {
 }
 
 void getInput(void) {
-	printf("2\n");							// TODO: TRACE STEPS TO SEE IF THIS WORKS PROPERLY
+	// printf("2\n");							// TODO: TRACE STEPS TO SEE IF THIS WORKS PROPERLY
 	// read()
 	// implements scanf
 }

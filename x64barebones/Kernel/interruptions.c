@@ -46,13 +46,13 @@ void mouseHandler() {
 void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene que recibir void segun la declaracion de handler_t
 	// acá debería identificar que quiere hacer y decirle a quien mandarle
 	// el write imprime en pantalla y le pasa lo escrito al buffer
-	printOnScreen("LLEGUE");
+	// printOnScreen("LLEGUE");
 	switch(instruction) {
 		case TIME:
 			displayTime();
 			break;
 		case READ:
-			printOnScreen("READ");
+			// printOnScreen("READ");
 			// TODO: read con strcpy del buffer de driverKeyboard
 			// return lo que te da el strcpy
 			break;
@@ -60,7 +60,7 @@ void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene q
 			printOnScreen(s);
 			break;
 		default:
-			printOnScreen("Wrong.");
+			// printOnScreen("Wrong.");
 			break;
 	}
 }

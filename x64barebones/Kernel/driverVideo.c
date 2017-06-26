@@ -1,6 +1,6 @@
 #include <driverVideo.h>
 
-char* vidStart = (char *) 0xB8000;
+char* vidStart = (char *) VIDSTART;
 
 static int pointer = 0;
 
@@ -11,7 +11,7 @@ void printOnScreenChar(char c) {
 		scroll();
 	}
 	*(vidStart + pointer) = c;
-	*(vidStart + pointer + 1) = 0x07;
+	*(vidStart + pointer + 1) = DEFAULTC;
 	pointer += PIXEL;
 }
 
@@ -22,7 +22,7 @@ void printOnScreen(char* string) {
 			scroll();
 		}
 		*(vidStart + pointer) = string[i];
-		*(vidStart + pointer + 1) = 0x07;
+		*(vidStart + pointer + 1) = DEFAULTC;
 		pointer += PIXEL;
 		i++;
 	}

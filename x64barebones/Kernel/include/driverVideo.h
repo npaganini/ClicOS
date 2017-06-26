@@ -13,6 +13,9 @@
 #define MAX_LONG 50
 #define GMT 3
 #define PIXEL 2
+#define MOUSE 0x70
+#define DEFAULTC 0x07
+#define VIDSTART 0xB8000
 
 void printOnScreenChar(char c);
 void printOnScreen(char* string);
