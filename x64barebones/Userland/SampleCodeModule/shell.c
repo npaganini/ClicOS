@@ -7,7 +7,6 @@ int shell(void) {
 	// pepito = printf("hola\n");
 	while(!exit) {
 		printf("[SCM]$ ");
-		printf("Still good");
 		getInput();
 		exit = processCommand();
 	}
@@ -23,7 +22,7 @@ void getInput(void) {
 
 int processCommand(void) {
 	// implements strcmp
-	return 0;
+	return 1;
 }
 
 void helpMenu(void) {

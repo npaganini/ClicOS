@@ -24,6 +24,7 @@ GLOBAL write_port
 
 EXTERN irqDispatcher
 EXTERN systemCallReceiver
+EXTERN systemCallHandler
 
 %include "./asm/macros.m"
 
@@ -90,8 +91,20 @@ irq15Handler:
 
 irq80Handler:
 	pushaq
-	call systemCallReceiver
+
+	mov rdi, rax
+	mov rsi, rbx
+	mov rdx, rcx
+	call systemCallHandler
+
+	mov rdi, 16
+	call irqDispatcher
+
+	mov al, 20h
+	out 20h, al		; EOI PIC MASTER
+
 	popaq
+
 	iretq
 
 sti:

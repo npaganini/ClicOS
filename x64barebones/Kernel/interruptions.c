@@ -54,7 +54,6 @@ void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene q
 		case READ:
 			printOnScreen("READ");
 			// TODO: read con strcpy del buffer de driverKeyboard
-			strcpy(s);
 			// return lo que te da el strcpy
 			break;
 		case WRITE:
@@ -80,6 +79,8 @@ void irqDispatcher(int irq) {
 			break;
 		case 12:
 			handlers[2]();
+			break;
+		case 16:
 			break;
 		default:
 			// printOnScreen("Nope");
