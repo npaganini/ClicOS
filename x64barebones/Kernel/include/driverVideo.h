@@ -28,6 +28,6 @@ int _sysTime(int date);
 void backspace(int newline);
 void scroll(void);
 char* longToChar(unsigned long n);
-void draw_pixel(int x, int y, int color);
+void draw_pixel(signed char x,signed char y, char color);
 
 #endif

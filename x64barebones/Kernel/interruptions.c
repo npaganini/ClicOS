@@ -52,12 +52,14 @@ void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene q
 			displayTime();
 			break;
 		case READ:
-			// printOnScreen("READ");
-			// TODO: read con strcpy del buffer de driverKeyboard
-			// return lo que te da el strcpy
+			cpyFromBuffer(s);
 			break;
 		case WRITE:
-			printOnScreen(s);
+			if(*s == 0) {
+				clearScreen();
+			} else {
+				printOnScreen(s);
+			}
 			break;
 		default:
 			// printOnScreen("Wrong.");

@@ -66,10 +66,10 @@ char* longToChar(unsigned long n) {
 	return ans;
 }
 
-void draw_pixel(int x, int y, int color){
-	int position= x*1 + y*80;
-	*(vidStart + position) = 'm';
-	*(vidStart + position + 1) = 0x07;
+void draw_pixel(signed char x,signed char y, char color) {
+	int position = (x*COLS + y)*2;
+	// *(vidStart + position) = '*';
+	*(vidStart + ((x*COLS + y)*2) + 1) = color;
 }
 
 void displayTime() {

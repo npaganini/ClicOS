@@ -5,10 +5,9 @@ int printf(char * s) {
 	return write(s);
 }
 
-int scanf(void) {
+int scanf(char * s) {
 	// systemCall a read
-	char buffer[50] = {0};
-	read(buffer);
+	read(s);
 	return 0;
 }
 
@@ -18,15 +17,23 @@ void putChar(char c) {
 }
 
 int getChar(void) {
-	// ?
 	return 0;
 }
 
 int strcmp(char * s1, char * s2) {
+	int i = 0;
 	do {
-		if(*s1 != *s2) {
+		if(*(s1+i) != *(s2+i)) {
 			return 0;
 		}
-	} while(*s1 != '\n' && *s2 != '\n');
+		i++;
+	} while(i < 4);
+	if(*(s1+i) == ' ') {
+		return (int) *(s1+i+1);
+	}
 	return 1;
+}
+
+void showTime(void) {
+	time();
 }

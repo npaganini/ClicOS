@@ -74,9 +74,9 @@ void keyboard_handler(void) {
 	}
 }
 
-// char auxCopy[50] = {0};
+char auxCopy[50] = {0};
 
-// void strcpy(char * s) {
+// void cpyToBuffer(char * s) {
 // 	int i = 0;
 // 	do {
 // 			auxCopy[i] = SHIFT_KEYS_MAPPING[buffer[bufferPlace - i]];
@@ -93,5 +93,26 @@ void keyboard_handler(void) {
 // 			return;
 // 		}
 // 	}
-// 	return strCopy;
 // }
+
+void cpyFromBuffer(char * s) {
+	int i = 0;
+	int j = 0;
+	do {
+		auxCopy[i] = SHIFT_KEYS_MAPPING[buffer[bufferPlace - i]];
+		i++;
+		if(i > 49) {
+			return;
+		}
+	} while(buffer[bufferPlace - i] != 28);
+	i--;
+	while(i > 0) {
+		*(s+j) = auxCopy[i];
+		i--;
+		j++;
+	}
+	*(s+j) = 0;
+	for(i = 0; i < 50; i++) {
+		auxCopy[i] = 0;
+	}
+}

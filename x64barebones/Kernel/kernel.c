@@ -96,54 +96,25 @@ void loading(void) {
 	}
 }
 
-void map_page(void * physicalAddress, void * virtualAddress)
+uint64_t *PD = (uint64_t *) 0x10000; 
+int PDIndex = 2;
+
+void map_page(uint64_t physicalAddress)
 {
-    // Make sure that both addresses are page-aligned.
-	unsigned long PDIndex = (unsigned long)virtualAddress >> 21 & 0x01FF;
-
-    unsigned long * PD = ((unsigned long *) 0x10000) + (8 * PDIndex);
-    // PD[PDIndex] = ((unsigned long)physicalAddress) & 0x08F; // Flags
-    *PD = ((unsigned long)physicalAddress) & 0x08F; // Flags
+    
+    //Si yo quisiera poner esta pagina presente....
+ //	PD[PDIndex] |= 0x1;
 
 
-    // unsigned long PDIndex = (unsigned long)virtualAddress >> 21 & 0x1FF;
-    // char * PDIndexStr = longToChar(PDIndex);
-    // printOnScreen("PDIndex");
-    // printOnScreen(PDIndexStr);
-    // unsigned long Index = (unsigned long) virtualAddress & 0x1FFFFF;
-    // char * IndexStr = longToChar(Index);
-    // printOnScreen("Index");
-    // printOnScreen(IndexStr);
-    // unsigned long * PD = ((unsigned long *) 0x10000) + (/*0x200000*/ 0x8 * PDIndex);
-    // char * PDStr = (char *) PD;
-    // printOnScreen(PDStr);
+	uint64_t mask = 0xFFF00000001FFFFF;
+	uint64_t aux = PD[PDIndex] & mask;
+	PD[PDIndex] =  aux | (physicalAddress & ~0x1FFFFF);
+	//reescribir el cr3 	
+	// mov rax, cr3 ; mov cr3, rax
 
-//    PD[Index] = ((unsigned long)physicalAddress) & 0x8F; //flags
-    // *PD = ((unsigned long)physicalAddress - Index) & 0x8F; //flags
- 
-    // unsigned long PDIndex = (unsigned long)virtualAddress >> 21 & 0x1FF;
-    // // char * PDIndexStr = intToChar(PDIndex);
-    // // printOnScreen(PDIndexStr);
-    // unsigned long Index = (unsigned long) virtualAddress & 0x1FFFFF;
-    // unsigned long * PD = ((unsigned long *) 0x10000); //+ (0x200000 * PDIndex);
-
-
-    // PD[PDIndex] = (((unsigned long)physicalAddress + Index) & 0x08F); //flags
-
-    // unsigned long * pd = (unsigned long *)0xFFFFF000;
-    // // Here you need to check whether the PD entry is present.
-    // // When it is not present, you need to create a new empty PT and
-    // // adjust the PDE accordingly.
- 
-    // unsigned long * pt = ((unsigned long *)0xFFC00000) + (0x400 * pdindex);
-    // // Here you need to check whether the PT entry is present.
-    // // When it is, then there is already a mapping present. What do you do now?
- 
-    // pt[ptindex] = ((unsigned long)physaddr) | (flags & 0xFFF) | 0x01; // Present
- 
-    // // Now you need to flush the entry in the TLB
-    // // or you might not notice the change.
 }
+
+map_page(0x800000);
 
 // void change(void* dir1, void* dir2) {
 void change(void) {
@@ -183,7 +154,7 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-	/**/
+	*/
 
 	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
 

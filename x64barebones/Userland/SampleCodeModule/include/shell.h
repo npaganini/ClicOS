@@ -5,5 +5,8 @@ int shell(void);
 void getInput(void);
 int processCommand(void);
 void helpMenu(void);
+void clear(void);
+void showCurrTime(void);
+void echo(char * s);
 
 #endif

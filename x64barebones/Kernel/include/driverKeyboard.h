@@ -4,6 +4,7 @@
 #define MAX_KEYPRESSED 60
 
 void keyboard_handler(void);
-void strcpy(char * s);
+void cpyToBuffer(char * s);
+void cpyFromBuffer(char * s);
 
 #endif

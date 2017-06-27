@@ -92,20 +92,24 @@ void mouse_handler() {
     }
   } else if (cycle == 2) {
     // printOnScreen("YYYYYYYY");
+    char leftClick = 0;
+    char rightClick = 0;
+    char wheelClick = 0;
 
     cycle = -1;
     if (mouse_bytes[0] & 0x4) {
       // printOnScreen("Middle button is pressed!");
-      wheelClickPressed = 1;
+      wheelClick = 1;
     }
     if (mouse_bytes[0] & 0x2) {
       // printOnScreen("Right button is pressed!");
-      rightClickPressed = 1;
+      rightClick = 1;
     }
     if (mouse_bytes[0] & 0x1) {
       // printOnScreen("Left button is pressed!");
-      leftClickPressed = 1;
+      leftClick = 1;
     }
+    printCursor(mouse_bytes[1]/3, mouse_bytes[2]/3, 1);
   }
   cycle++;
   // printOnScreen("Out;");
@@ -113,8 +117,8 @@ void mouse_handler() {
 
 void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {
 
-  uint8_t aux_x = mouse_x + mouseCoord_y;
-  uint8_t aux_y = mouse_y - mouseCoord_x;
+  uint8_t aux_x = mouse_x + mouseCoord_x;
+  uint8_t aux_y = mouse_y - mouseCoord_y;
 
   if( aux_x >= 0 && aux_x < COLS && aux_y >= 0 && aux_y < ROWS ) {
 
@@ -126,12 +130,12 @@ void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {
 //        for( i=0; i< ROWS*COLS*PIXEL; i++){
 //          i++;
 //          video[i] = MOUSE;
-  while(start != position) {
-    start++;
-    *start = DEFAULTC;
-    start++;
-        }
-        leftClickPressed = 0;
+      while(start != position) {
+        start++;
+        *start = DEFAULTC;
+        start++;
+      }
+      leftClickPressed = 0;
       }
     } else {
       if(!leftClickPressed) {
@@ -142,8 +146,10 @@ void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {
       }
       position[1] = MOUSE;
     }
+  
     mouse_x = aux_x;
     mouse_y = aux_y;
+    position[1] = 0x81;
   }
-  position[1] = 0x81;
+      draw_pixel(mouse_x, mouse_y, 0x87);
 }
