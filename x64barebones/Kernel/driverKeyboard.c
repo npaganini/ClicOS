@@ -98,12 +98,13 @@ char auxCopy[50] = {0};
 void cpyFromBuffer(char * s) {
 	int i = 0;
 	int j = 0;
+	printOnScreen("Arranca el copy ");
 	do {
 		auxCopy[i] = SHIFT_KEYS_MAPPING[buffer[bufferPlace - i]];
 		i++;
-		if(i > 49) {
-			return;
-		}
+		// if(i > 49) {
+		// 	return;
+		// }
 	} while(buffer[bufferPlace - i] != 28);
 	i--;
 	while(i > 0) {
@@ -111,8 +112,10 @@ void cpyFromBuffer(char * s) {
 		i--;
 		j++;
 	}
+	printOnScreen("Hace el copy ");
 	*(s+j) = 0;
 	for(i = 0; i < 50; i++) {
 		auxCopy[i] = 0;
 	}
+	printOnScreen("Termina el copy ");
 }

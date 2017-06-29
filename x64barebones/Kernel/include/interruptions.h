@@ -7,6 +7,8 @@
 #define READ  1
 #define WRITE 2
 
+#define TIMER 100000000
+
 void iSetHandler(int index, uint64_t handler);
 void setIDT();
 void sti();
@@ -39,6 +41,7 @@ void initialize_Mouse(void);
 
 
 void change(void);
-void map_page(void * physicalAddress, void * virtualAddress);
+// void map_page(void * physicalAddress, void * virtualAddress);
+void map_page(uint64_t physicalAddress);
 
 #endif

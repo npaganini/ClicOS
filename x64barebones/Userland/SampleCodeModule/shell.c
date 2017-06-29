@@ -12,7 +12,7 @@ int shell(void) {
 		getInput();
 		exit = processCommand();
 	}
-	return !exit;
+	return exit;
 	// return pepito;
 }
 
@@ -40,6 +40,8 @@ int processCommand(void) {
 		}
 		if(strcmp(aux, "echo")) {
 			echo(buffer+5);
+		} else {
+			printf("Comando no reconocido.");
 		}
 	}
 	return 1;

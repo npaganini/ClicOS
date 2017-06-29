@@ -10,9 +10,6 @@
 #include <driverMouse.h>
 #include <terminal.h>
 
-#define TIMER 100000000
-
-
 extern uint8_t text;
 extern uint8_t rodata;
 extern uint8_t data;
@@ -113,25 +110,25 @@ void map_page(uint64_t physicalAddress)
 	// mov rax, cr3 ; mov cr3, rax
 
 }
+// map_page(0x800000);
 
-map_page(0x800000);
 
 // void change(void* dir1, void* dir2) {
-void change(void) {
-	// char* vidStart = (char *) 0xB8000;
-    char* hola = (char *) 0xA00000;
-    *(hola) = 'c';
-    char* hola2 = (char *) 0xB00000;
-    *(hola2) = 'a';
-    map_page(hola, hola);
-    map_page(hola2, hola2);
-    printOnScreen(hola);
-    printOnScreen(hola2);
-    map_page(hola, hola2);
-    // map_page(hola2, hola2);
-    printOnScreen(hola);
-    printOnScreen(hola2);
-}
+// void change(void) {
+// 	// char* vidStart = (char *) 0xB8000;
+//     char* hola = (char *) 0xA00000;
+//     *(hola) = 'c';
+//     char* hola2 = (char *) 0xB00000;
+//     *(hola2) = 'a';
+//     map_page(hola, hola);
+//     map_page(hola2, hola2);
+//     printOnScreen(hola);
+//     printOnScreen(hola2);
+//     map_page(hola, hola2);
+//     // map_page(hola2, hola2);
+//     printOnScreen(hola);
+//     printOnScreen(hola2);
+// }
 
 int main()
 {

@@ -52,6 +52,7 @@ void systemCallHandler(int instruction, char * s, int sSize) {		// TODO: tiene q
 			displayTime();
 			break;
 		case READ:
+		printOnScreen("Llega al READ");
 			cpyFromBuffer(s);
 			break;
 		case WRITE:
