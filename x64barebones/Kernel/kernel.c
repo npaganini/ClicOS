@@ -108,6 +108,7 @@ void map_page(uint64_t physicalAddress)
 	PD[PDIndex] =  aux | (physicalAddress & ~0x1FFFFF);
 	//reescribir el cr3 	
 	// mov rax, cr3 ; mov cr3, rax
+	rewrite_CR3();
 
 }
 // map_page(0x800000);

@@ -21,6 +21,7 @@ GLOBAL irq15Handler
 GLOBAL irq80Handler
 GLOBAL read_port
 GLOBAL write_port
+GLOBAL rewrite_CR3
 
 EXTERN irqDispatcher
 EXTERN systemCallReceiver
@@ -151,6 +152,12 @@ write_port:
 	mov rsp, rbp
 	pop rbp
 	ret
+
+rewrite_CR3:
+
+	mov rax, cr3
+	mov cr3, rax
+	ret	
 
 cpuVendor:
 	push rbp
