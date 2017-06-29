@@ -8,6 +8,7 @@
 
 #include <driverVideo.h>
 #include <driverMouse.h>
+#include <driverKeyboard.h>
 #include <terminal.h>
 
 extern uint8_t text;
@@ -21,6 +22,7 @@ static const uint64_t PageSize = 0x1000;
 
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
+static void * const userGuestModuleAddress = (void*)0x600000;
 
 typedef int (*EntryPoint)();
 void loading(void);
@@ -54,7 +56,8 @@ void * initializeKernelBinary()
 	ncNewline();
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
-		sampleDataModuleAddress
+		sampleDataModuleAddress,
+		// userGuestAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
@@ -131,6 +134,18 @@ void map_page(uint64_t physicalAddress)
 //     printOnScreen(hola2);
 // }
 
+void displayWelcomeMsg(void) {
+	printOnScreen("Please select the module to run:\n");
+	printOnScreen("1: Sample Code Module\n");
+	printOnScreen("2: User Guest Module\n");
+}
+
+int getOptionFromBuffer(void) {
+	int option = 0;
+	option = getCharFromBuffer() - '0';
+	return option;
+}
+
 int main()
 {
 	/*/
@@ -154,10 +169,12 @@ int main()
 	ncPrint("[Finished]");
 	*/
 
+	int option = 0;
+
 	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
 
 	EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
-	// EntryPoint userGuest = (EntryPoint) sampleCodeModuleAddress;
+	// EntryPoint userGuestModule = (EntryPoint) userGuestModuleAddress;
 
 	loading();
 
@@ -179,18 +196,20 @@ int main()
 	sti();
 
 	// change();
-
-	// terminal();
-
-	// int mhm = 0;
-	// mhm = sampleCodeModule();
-	sampleCodeModule();
-
-	// if(!mhm) {
-	// 	printOnScreen("llega a printf");
-	// }
-
-	while(1);
+	do {
+		displayWelcomeMsg();
+		option = getOptionFromBuffer();
+		switch(option) {
+			case 1:
+				option = sampleCodeModule();
+				break;
+			case 2:
+				// option = userGuestModule();
+				break;
+			default:
+				break;
+		}
+	} while(1);
 
 	return 0;
 }

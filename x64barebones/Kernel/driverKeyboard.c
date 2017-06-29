@@ -121,5 +121,8 @@ void cpyFromBuffer(char * s) {
 }
 
 char getCharFromBuffer(void) {
-	return 'c';
+	if(bufferPlace > 0) {
+		return buffer[bufferPlace-1];
+	}
+	return 0;
 }

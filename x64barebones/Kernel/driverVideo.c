@@ -21,9 +21,16 @@ void printOnScreen(char* string) {
 		if(pointer == ROWS * COLS * PIXEL) {
 			scroll();
 		}
-		*(vidStart + pointer) = string[i];
-		*(vidStart + pointer + 1) = DEFAULTC;
-		pointer += PIXEL;
+		if(string[i] == '\n') {
+			myNewLine();
+			if(pointer > ROWS * COLS * PIXEL) {
+				scroll();
+			}
+		} else {
+			*(vidStart + pointer) = string[i];
+			*(vidStart + pointer + 1) = DEFAULTC;
+			pointer += PIXEL;
+		}
 		i++;
 	}
 }
