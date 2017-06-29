@@ -22,6 +22,7 @@ GLOBAL irq80Handler
 GLOBAL read_port
 GLOBAL write_port
 GLOBAL rewrite_CR3
+GLOBAL _sysTime
 
 EXTERN irqDispatcher
 EXTERN systemCallReceiver
@@ -157,7 +158,19 @@ rewrite_CR3:
 
 	mov rax, cr3
 	mov cr3, rax
-	ret	
+	ret
+
+_sysTime:
+	push rbp
+	mov rbp, rsp
+
+	mov	rax, rdi
+	out	70h, al
+	in	al, 71h
+
+	mov rsp, rbp
+	pop rbp
+	ret
 
 cpuVendor:
 	push rbp
