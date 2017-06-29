@@ -7,5 +7,6 @@ void keyboard_handler(void);
 void cpyToBuffer(char * s);
 void cpyFromBuffer(char * s);
 char getCharFromBuffer(void);
+int getOption(void);
 
 #endif

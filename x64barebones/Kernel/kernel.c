@@ -140,12 +140,6 @@ void displayWelcomeMsg(void) {
 	printOnScreen("2: User Guest Module\n");
 }
 
-int getOptionFromBuffer(void) {
-	int option = 0;
-	option = getCharFromBuffer() - '0';
-	return option;
-}
-
 int main()
 {
 	/*/
@@ -198,15 +192,20 @@ int main()
 	// change();
 	do {
 		displayWelcomeMsg();
-		option = getOptionFromBuffer();
+		do {
+			option = getOption();
+		} while(getCharFromBuffer() != '\n');
 		switch(option) {
 			case 1:
+				printOnScreen("Pepito");
 				option = sampleCodeModule();
+				// while(1);
 				break;
 			case 2:
 				// option = userGuestModule();
 				break;
 			default:
+				printOnScreen("Not a module\n");
 				break;
 		}
 	} while(1);

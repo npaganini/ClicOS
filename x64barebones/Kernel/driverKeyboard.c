@@ -120,9 +120,18 @@ void cpyFromBuffer(char * s) {
 	printOnScreen("Termina el copy ");
 }
 
+int getOption(void) {
+	if(bufferPlace > 0) {
+		// return buffer[bufferPlace-1] - '0';
+		return 1;
+	}
+	return 0;
+}
+
 char getCharFromBuffer(void) {
 	if(bufferPlace > 0) {
-		return buffer[bufferPlace-1];
+		return buffer[bufferPlace];
+		// return '\n';
 	}
 	return 0;
 }
