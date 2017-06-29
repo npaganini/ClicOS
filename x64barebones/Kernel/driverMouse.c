@@ -1,6 +1,7 @@
 #include <interruptions.h>
 #include <driverVideo.h>
 #include <driverMouse.h>
+#include <driverKeyboard.h>
 
 char * vidStartM = (char *) VIDSTART;
 static int cycle = 0; // unsigned char
@@ -10,8 +11,10 @@ static int mouse_y = 0;     // signed char
 static char leftClickPressed = 0;
 static char rightClickPressed = 0;
 static char wheelClickPressed = 0;
-static char * position = 0;
-static char * start = 0;
+//static char * position = 0;
+//static int start = 0;
+static int leftStart_x = 0;     // signed char
+static int leftStart_y = 0;     // signed char
 
 void mouse_wait(unsigned char type){
   unsigned int _time_out = 100000;
@@ -122,7 +125,9 @@ void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {
 
   if( aux_x >= 0 && aux_x < COLS && aux_y >= 0 && aux_y < ROWS ) {
 
-    char * position = vidStartM + COLS*aux_y*PIXEL + aux_x*PIXEL;
+    draw_pixel(aux_x, aux_y, 0x87);
+
+ //   char * position = vidStartM + COLS*aux_y*PIXEL + aux_x*PIXEL;
 
     if(!leftClick) {
       if(leftClickPressed) {
@@ -130,26 +135,26 @@ void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {
 //        for( i=0; i< ROWS*COLS*PIXEL; i++){
 //          i++;
 //          video[i] = MOUSE;
-      while(start != position) {
-        start++;
-        *start = DEFAULTC;
-        start++;
-      }
+      cleanSelect(leftStart_x, leftStart_y, aux_x, aux_y, DEFAULTC);
+      leftStart_x = 0;
+      leftStart_y = 0;
       leftClickPressed = 0;
       }
     } else {
       if(!leftClickPressed) {
         leftClickPressed = 1;
-//        start_x = aux_x;
-//        start_y = aux_y;
-        start = position;
+        leftStart_x = aux_x;
+        leftStart_y = aux_y;
       }
-      position[1] = MOUSE;
+//      position[1] = MOUSE;
+          cpyToBuffer(vidStartM + ((aux_x*COLS + aux_y)*2));
+          draw_pixel(aux_x, aux_y, 0x90);
+
     }
   
     mouse_x = aux_x;
     mouse_y = aux_y;
-    position[1] = 0x81;
+//    position[1] = 0x81;
+    draw_pixel(mouse_x, mouse_y, DEFAULTC);
   }
-      draw_pixel(mouse_x, mouse_y, 0x87);
 }

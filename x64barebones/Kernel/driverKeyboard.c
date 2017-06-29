@@ -76,31 +76,31 @@ void keyboard_handler(void) {
 
 char auxCopy[50] = {0};
 
-// void cpyToBuffer(char * s) {
-// 	int i = 0;
-// 	do {
-// 			auxCopy[i] = SHIFT_KEYS_MAPPING[buffer[bufferPlace - i]];
-// 		i++;
-// 		if(i > 49) {
-// 			return;
-// 		}
-// 	} while(buffer[bufferPlace - i] != 28);
-// 	*(s+i+1) = 0;
-// 	while(*(s+i) != '\n') {
-// 		*(s+i) = auxCopy[i];
-// 		i--;
-// 		if(i < 0) {
-// 			return;
-// 		}
-// 	}
-// }
+void cpyToBuffer(char * s) {
+	int i = 0;
+	do {
+		auxCopy[i] = buffer[bufferPlace - i];
+		i++;
+		// if(i > 49) {
+		// 	return;
+		// }
+	} while(buffer[bufferPlace - i] != 28);
+	*(s+i+1) = 0;
+	while(*(s+i) != '\n') {
+		*(s+i) = auxCopy[i];
+		i--;
+		if(i < 0) {
+			return;
+		}
+	}
+}
 
 void cpyFromBuffer(char * s) {
 	int i = 0;
 	int j = 0;
 	printOnScreen("Arranca el copy ");
 	do {
-		auxCopy[i] = SHIFT_KEYS_MAPPING[buffer[bufferPlace - i]];
+		auxCopy[i] = buffer[bufferPlace - i];
 		i++;
 		// if(i > 49) {
 		// 	return;
@@ -118,4 +118,8 @@ void cpyFromBuffer(char * s) {
 		auxCopy[i] = 0;
 	}
 	printOnScreen("Termina el copy ");
+}
+
+char getCharFromBuffer(void) {
+	return 'c';
 }

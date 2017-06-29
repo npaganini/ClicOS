@@ -29,5 +29,6 @@ void backspace(int newline);
 void scroll(void);
 char* longToChar(unsigned long n);
 void draw_pixel(signed char x,signed char y, char color);
+void cleanSelect(signed char start_x,signed char start_y, signed char end_x,signed char end_y, char color);
 
 #endif

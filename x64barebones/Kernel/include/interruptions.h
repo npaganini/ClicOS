@@ -38,8 +38,7 @@ void keyboard_handler(void);
 void mouse_handler(void);
 void systemCallHandler(int instruction, char * s, int sSize);
 void initialize_Mouse(void);
-
-
+void rewrite_CR3(void);
 void change(void);
 // void map_page(void * physicalAddress, void * virtualAddress);
 void map_page(uint64_t physicalAddress);

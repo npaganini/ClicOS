@@ -67,9 +67,20 @@ char* longToChar(unsigned long n) {
 }
 
 void draw_pixel(signed char x,signed char y, char color) {
-	int position = (x*COLS + y)*2;
+	//int position = (x*COLS + y)*2;
 	// *(vidStart + position) = '*';
 	*(vidStart + ((x*COLS + y)*2) + 1) = color;
+}
+
+void cleanSelect(signed char start_x,signed char start_y, signed char end_x, signed char end_y, char color) {
+	//int position = (x*COLS + y)*2;
+	// *(vidStart + position) = '*';
+	char * start = (vidStart + ((start_x*COLS + start_y)*2) + 1);
+	char * end = (vidStart + ((end_x*COLS + end_y)*2) + 1);
+	while( start != end ) {
+		*start = color;
+		start+=2;
+	}
 }
 
 void displayTime() {
