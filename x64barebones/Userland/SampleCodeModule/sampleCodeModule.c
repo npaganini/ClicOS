@@ -1,4 +1,5 @@
 #include "include/shell.h"
+#include "include/lib.h"
 
 int main() {
 	if(shell()) {

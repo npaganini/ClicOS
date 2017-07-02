@@ -19,12 +19,12 @@ static char SHIFT_KEYS_MAPPING[] = {0, 'ESC', '!', '\0', '#', '$', '%', '&', '/'
 
 static int mayus = 0;
 static int bufferPlace = 0;
-static char buffer[ROWS*COLS] = {0};
+static uint64_t buffer[ROWS*COLS] = {0};
 // buffer[bufferPlace] = 28;
 // bufferPlace++;
 
 void keyboard_handler(void) {
-	int keycode;
+	uint64_t keycode;
 
 	keycode = read_port(0x60);
 
@@ -122,16 +122,14 @@ void cpyFromBuffer(char * s) {
 
 int getOption(void) {
 	if(bufferPlace > 0) {
-		// return buffer[bufferPlace-1] - '0';
-		return 1;
+		return KEYS_MAPPING[buffer[bufferPlace-2]] - '0';
 	}
 	return 0;
 }
 
 char getCharFromBuffer(void) {
 	if(bufferPlace > 0) {
-		return buffer[bufferPlace];
-		// return '\n';
+		return (char) KEYS_MAPPING[(int) buffer[bufferPlace-1]];
 	}
 	return 0;
 }

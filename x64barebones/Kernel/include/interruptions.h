@@ -41,7 +41,7 @@ void mouse_handler(void);
 void systemCallHandler(int instruction, char * s, int sSize);
 void initialize_Mouse(void);
 void rewrite_CR3(void);
-void displayWelcomeMsg(void);
+void displayModuleMsg(void);
 int getOptionFromBuffer(void);
 void change(void);
 // void map_page(void * physicalAddress, void * virtualAddress);

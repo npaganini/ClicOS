@@ -134,7 +134,7 @@ void map_page(uint64_t physicalAddress)
 //     printOnScreen(hola2);
 // }
 
-void displayWelcomeMsg(void) {
+void displayModuleMsg(void) {
 	printOnScreen("Please select the module to run:\n");
 	printOnScreen("1: Sample Code Module\n");
 	printOnScreen("2: User Guest Module\n");
@@ -191,13 +191,16 @@ int main()
 
 	// change();
 	do {
-		displayWelcomeMsg();
-		do {
-			option = getOption();
-		} while(getCharFromBuffer() != '\n');
+		char aux[2] = {0};
+		displayModuleMsg();
+		while(getCharFromBuffer() != '\n') {
+			aux[0] = getCharFromBuffer();
+			// printOnScreen(aux);
+		}
+		option = getOption();
+		// aux[0] = option + '0';
 		switch(option) {
 			case 1:
-				printOnScreen("Pepito");
 				option = sampleCodeModule();
 				// while(1);
 				break;

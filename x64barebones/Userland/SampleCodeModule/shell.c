@@ -10,6 +10,8 @@ int shell(void) {
 	while(!exit) {
 		printf("[SCM]$ ");
 		getInput();
+		// printf(buffer);		// NO IMPRIME NADA. NO ESTA COPIANDO BIEN?
+		while(buffer[0] != '\n');
 		exit = processCommand();
 	}
 	return exit;
