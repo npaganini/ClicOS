@@ -7,7 +7,7 @@
 #define READ  1
 #define WRITE 2
 
-#define TIMER 100000000
+// #define TIMER 100000000000
 
 
 

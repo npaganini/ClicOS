@@ -5,33 +5,41 @@ static char buffer[50] = {0};
 
 int shell(void) {
 	int exit = 0;
-	// int pepito = 0;
-	// pepito = printf("hola\n");
 	while(!exit) {
 		printf("[SCM]$ ");
+		while(getChar() != '\n');
 		getInput();
-		// printf(buffer);		// NO IMPRIME NADA. NO ESTA COPIANDO BIEN?
-		while(buffer[0] != '\n');
+		// printf(buffer);
 		exit = processCommand();
+		clearShellBuffer();
+		if(exit) {
+			printf("Cerrando modulo.\n");
+		}
 	}
 	return exit;
-	// return pepito;
 }
 
 void getInput(void) {
-	// printf("2\n");							// TODO: TRACE STEPS TO SEE IF THIS WORKS PROPERLY
 	scanf(buffer);
 }
 
 int processCommand(void) {
 	// maquina de estados o varios strcmp
+	// printf(buffer);
 	if(strcmp(buffer, "help")) {
 		helpMenu();
+		// printf("HELP\n");
+		return 0;
 	} else if(strcmp(buffer, "null")) {
 		clear();
+		// printf("CLEAR\n");
+		return 0;
 	} else if(strcmp(buffer, "time")) {
+		// printf("TIME\n");
 		showCurrTime();
+		return 0;
 	} else if(strcmp(buffer, "exit")) {
+		// printf("EXIT\n");
 		return 1;
 	// } else if(echo((char *) strcmp(buffer, "echo"))) {
 	} else {
@@ -46,7 +54,7 @@ int processCommand(void) {
 			printf("Comando no reconocido.");
 		}
 	}
-	return 1;
+	return 0;
 }
 
 void helpMenu(void) {
@@ -68,4 +76,11 @@ void showCurrTime(void) {
 
 void echo(char * s) {
 	printf(s);
+}
+
+void clearShellBuffer(void) {
+	int i;
+	for(i = 0; i < 50; i++) {
+		buffer[i] = 0;
+	}
 }

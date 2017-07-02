@@ -98,27 +98,53 @@ void cpyToBuffer(char * s) {
 void cpyFromBuffer(char * s) {
 	int i = 0;
 	int j = 0;
-	printOnScreen("Arranca el copy ");
+	// char auxCopy[30] = {0};
 	do {
-		auxCopy[i] = buffer[bufferPlace - i];
-		i++;
-		// if(i > 49) {
-		// 	return;
-		// }
-	} while(buffer[bufferPlace - i] != 28);
+		if(bufferPlace - i - 2 >= 0) {
+			auxCopy[i] = KEYS_MAPPING[buffer[bufferPlace - i -2]];
+			buffer[bufferPlace - i - 2] = 0;
+			i++;
+		}
+		if(i > 49) {
+			return;
+		}
+	} while(bufferPlace - i - 2 >= 0 && buffer[bufferPlace - i -2] != 28);
 	i--;
-	while(i > 0) {
+	while(i >= 0) {
 		*(s+j) = auxCopy[i];
 		i--;
 		j++;
 	}
-	printOnScreen("Hace el copy ");
 	*(s+j) = 0;
-	for(i = 0; i < 50; i++) {
+	for(i = 0; i < 30; i++) {
 		auxCopy[i] = 0;
 	}
-	printOnScreen("Termina el copy ");
 }
+
+// void cpyFromBuffer(char * s) {
+// 	int i = 0;
+// 	int j = 0;
+// 	// printOnScreen("Arranca el copy ");
+// 	do {
+// 		auxCopy[i] = buffer[bufferPlace - i];
+// 		i++;
+// 		// if(i > 49) {
+// 		// 	return;
+// 		// }
+// 	} while(buffer[bufferPlace - i] != 28);
+// 	i--;
+// 	while(i > 0) {
+// 		*(s+j) = auxCopy[i];
+// 		i--;
+// 		j++;
+// 	}
+// 	// printOnScreen("Hace el copy ");
+// 	*(s+j) = 0;
+// 	for(i = 0; i < 50; i++) {
+// 		auxCopy[i] = 0;
+// 	}
+// 	// printOnScreen("Termina el copy ");
+// }
 
 int getOption(void) {
 	if(bufferPlace > 0) {
@@ -132,4 +158,12 @@ char getCharFromBuffer(void) {
 		return (char) KEYS_MAPPING[(int) buffer[bufferPlace-1]];
 	}
 	return 0;
+}
+
+void clearBuffer(void) {
+	int i;
+	for(i = 0; i < ROWS*COLS; i++) {
+		buffer[i] = 0;
+	}
+	bufferPlace = 0;
 }

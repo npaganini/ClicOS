@@ -6,8 +6,7 @@ int printf(char * s) {
 }
 
 int scanf(char * s) {
-	// systemCall a read
-	read(s);
+	read(s, 0);
 	return 0;
 }
 
@@ -17,7 +16,9 @@ void putChar(char c) {
 }
 
 int getChar(void) {
-	return 0;
+	char c;
+	read(&c, 1);
+	return (int) c;
 }
 
 int strcmp(char * s1, char * s2) {

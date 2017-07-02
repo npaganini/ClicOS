@@ -11,6 +11,7 @@ systemCall:
 
 	mov rax, rdi
 	mov rbx, rsi
+	mov rcx, rdx
 
 	int 80h
 

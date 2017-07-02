@@ -8,5 +8,6 @@ void cpyToBuffer(char * s);
 void cpyFromBuffer(char * s);
 char getCharFromBuffer(void);
 int getOption(void);
+void clearBuffer(void);
 
 #endif

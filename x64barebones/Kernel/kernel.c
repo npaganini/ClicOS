@@ -194,17 +194,20 @@ int main()
 		char aux[2] = {0};
 		displayModuleMsg();
 		while(getCharFromBuffer() != '\n') {
-			aux[0] = getCharFromBuffer();
+			// aux[0] = getCharFromBuffer();
 			// printOnScreen(aux);
 		}
 		option = getOption();
 		// aux[0] = option + '0';
+		clearBuffer();
 		switch(option) {
 			case 1:
+				clearScreen();
 				option = sampleCodeModule();
 				// while(1);
 				break;
 			case 2:
+				clearScreen();
 				// option = userGuestModule();
 				break;
 			default:

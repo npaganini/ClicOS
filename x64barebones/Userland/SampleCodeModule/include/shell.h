@@ -8,5 +8,6 @@ void helpMenu(void);
 void clear(void);
 void showCurrTime(void);
 void echo(char * s);
+void clearShellBuffer(void);
 
 #endif
