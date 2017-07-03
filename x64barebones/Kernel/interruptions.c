@@ -44,7 +44,6 @@ void mouseHandler() {
 }
 
 void systemCallHandler(int instruction, char * s, int sSize) {
-	// printOnScreen("LLEGUE");
 	switch(instruction) {
 		case TIME:
 			printOnScreen("La hora es: ");
@@ -65,7 +64,6 @@ void systemCallHandler(int instruction, char * s, int sSize) {
 			}
 			break;
 		default:
-			// printOnScreen("Wrong.");
 			break;
 	}
 }
@@ -88,7 +86,6 @@ void irqDispatcher(int irq) {
 		case 16:
 			break;
 		default:
-			// printOnScreen("Nope");
 			break;
 	}
 }

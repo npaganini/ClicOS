@@ -5,6 +5,6 @@ void dummyPrintf(char * s) {
 }
 
 int main() {
-	dummyPrintf("I'm a dummy!\n");
+	dummyPrintf("Ha! I'm a dummy, you dummy!\n");
 	return 0;
 }

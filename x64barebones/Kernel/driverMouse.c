@@ -85,7 +85,7 @@ void initialize_Mouse() {
 
 
 void mouse_handler() {
-  // printOnScreen("In-");
+  printOnScreen("In-");
   mouse_bytes[cycle] = read_port(0x60);
   if(cycle == 0){
     // printOnScreen("cycle es cero@");
@@ -105,17 +105,17 @@ void mouse_handler() {
       wheelClick = 1;
     }
     if (mouse_bytes[0] & 0x2) {
-      // printOnScreen("Right button is pressed!");
+      printOnScreen("RMB is pressed!");
       rightClick = 1;
     }
     if (mouse_bytes[0] & 0x1) {
-      // printOnScreen("Left button is pressed!");
+      printOnScreen("LMB is pressed!");
       leftClick = 1;
     }
     printCursor(mouse_bytes[1]/3, mouse_bytes[2]/3, 1);
   }
   cycle++;
-  // printOnScreen("Out;");
+  printOnScreen("Out;");
 }
 
 void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {

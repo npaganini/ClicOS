@@ -38,9 +38,11 @@ void keyboard_handler(void) {
 			}
 			backspace(0);
 			if(bufferPlace == 0) {
-				bufferPlace = ROWS * COLS - 1;
+				bufferPlace = bufferRead = bufferConsumed = ROWS * COLS - 1;
 			} else {
 				bufferPlace--;
+				bufferRead--;
+				bufferConsumed--;
 			}
 		} else {
 			switch(keycode) {
@@ -82,9 +84,6 @@ void cpyToBuffer(char * s) {
 	do {
 		auxCopy[i] = buffer[bufferPlace - i];
 		i++;
-		// if(i > 49) {
-		// 	return;
-		// }
 	} while(buffer[bufferPlace - i] != 28);
 	*(s+i+1) = 0;
 	while(*(s+i) != '\n') {
@@ -96,44 +95,7 @@ void cpyToBuffer(char * s) {
 	}
 }
 
-void cpyFromBuffer(char * s) {				// FIX THIS
-	// int i = 0;
-	// int j = 0;
-	// // char auxCopy[30] = {0};
-	// buffer[bufferPlace] = 0;
-	// buffer[bufferPlace - 1] = 0;
-	// do {
-	// 	if(bufferPlace - i - 2 >= 0) {
-	// 		auxCopy[i] = KEYS_MAPPING[buffer[bufferPlace - i -2]];
-	// 		buffer[bufferPlace - i - 2] = 0;
-	// 		i++;
-	// 	}
-	// 	if(i > 49) {
-	// 		return;
-	// 	}
-	// } while(bufferPlace - i - 2 >= 0 && buffer[bufferPlace - i -2] != 28);
-	// if(bufferPlace - i >= 0) {
-	// 	bufferPlace -= i;
-	// } else {
-	// 	int j = bufferPlace - i;
-	// 	bufferPlace = ROWS*COLS;
-	// 	bufferPlace += j;
-	// }
-	// i--;
-	// if(bufferPlace + 1 == ROWS*COLS) {
-	// 	bufferPlace = 0;
-	// } else {
-	// 	bufferPlace++;
-	// }
-	// while(i >= 0) {
-	// 	*(s+j) = auxCopy[i];
-	// 	i--;
-	// 	j++;
-	// }
-	// *(s+j) = 0;
-	// for(i = 0; i < 30; i++) {
-	// 	auxCopy[i] = 0;
-	// }
+void cpyFromBuffer(char * s) {
 	int i = 0;
 	while(bufferConsumed < bufferRead) {
 		*(s+i) = KEYS_MAPPING[buffer[bufferConsumed]];

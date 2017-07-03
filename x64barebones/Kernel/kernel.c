@@ -22,7 +22,7 @@ static const uint64_t PageSize = 0x1000;
 
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
-static void * const dummyModuleAddress = (void*)0x600000;
+static void * const dummyModuleAddress = 	  (void*)0x600000;
 
 typedef int (*EntryPoint)();
 
@@ -56,7 +56,7 @@ void * initializeKernelBinary()
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress,
-		// dummyModuleAddress
+		dummyModuleAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
@@ -108,6 +108,17 @@ void map_page(uint64_t physicalAddress)
 	//reescribir el cr3 	
 	// mov rax, cr3 ; mov cr3, rax
 	rewrite_CR3();
+
+	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
+	// void map(void * fisica, void * module){
+	// 	memcpy(fisica,module,10000);
+	memcpy(0x800000, physicalAddress, 10000);
+	// 	*((uint64_t *)entry) = fisica;
+	// }
+
+	// map(0x1000000,shell);	
+	// ((EntryPoint)*((uint64_t *)entry))();
+	// ip();
 }
 // map_page(0x800000);
 
@@ -160,10 +171,8 @@ int main()
 
 	int option = 0;
 
-	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
-
 	EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
-	// EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
+	EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
 
 	loading();
 
@@ -187,22 +196,6 @@ int main()
 
 	// change();
 	do {
-// 		option = getOption() - '0';
-// 			case 1:
-// 				clearScreen();
-// 				// map_page(sampleCodeModuleAddress);
-// 				option = sampleCodeModule();
-// 				break;
-// 			case 2:
-// 				clearScreen();
-// 				map_page(dummyModuleAddress);
-// 				option = dummyModule();
-// 				break;
-// 			default:
-// 				break;
-// 		}
-
-
 		// char aux[2] = {0};
 		displayModuleMsg();
 		while(getCharFromBuffer() != '\n');
@@ -211,20 +204,19 @@ int main()
 		switch(option) {
 			case 1:
 				clearScreen();
-				// printOnScreen("Opcion 1");
-				// map_page(sampleCodeModuleAddress);
+				map_page(sampleCodeModuleAddress);
 				option = sampleCodeModule();
 				break;
 			case 2:
 				clearScreen();
-				// printOnScreen("Opcion 2");
-				// map_page(dummyModuleAddress);
-				// option = dummyModule();
+				map_page(dummyModuleAddress);
+				option = dummyModule();
 				break;
 			default:
 				printOnScreen("Not a module\n");
 				break;
 		}
+		printOnScreen("\n");
 	} while(1);
 
 	return 0;
