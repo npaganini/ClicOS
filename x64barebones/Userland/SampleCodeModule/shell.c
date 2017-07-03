@@ -7,15 +7,9 @@ int shell(void) {
 	int exit = 0;
 	while(!exit) {
 		printf("[SCM]$ ");
-		// printf(buffer);
-		while(getChar() != '\n');	// despues de la primera pasada it's always true?
-		// printf(buffer);
+		while(getChar() != '\n');
 		getInput();
-		// printf(buffer);
 		exit = processCommand();
-		printf(buffer);
-		// clearShellBuffer();	// me escribe SMC e imprime el msg de help (ver scanf)
-		printf(buffer);
 	}
 	return exit;
 }

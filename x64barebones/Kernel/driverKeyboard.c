@@ -19,6 +19,8 @@ static char SHIFT_KEYS_MAPPING[] = {0, 'ESC', '!', '\0', '#', '$', '%', '&', '/'
 
 static int mayus = 0;
 static int bufferPlace = 0;
+static int bufferRead = 0;
+static int bufferConsumed = 0;
 static uint64_t buffer[ROWS*COLS] = {0};
 static char ans;
 
@@ -132,18 +134,25 @@ void cpyFromBuffer(char * s) {				// FIX THIS
 	// for(i = 0; i < 30; i++) {
 	// 	auxCopy[i] = 0;
 	// }
+	int i = 0;
+	while(bufferConsumed < bufferRead) {
+		*(s+i) = KEYS_MAPPING[buffer[bufferConsumed]];
+		i++;
+		bufferConsumed++;
+	}
 }
 
 int getOption(void) {
-	if()
-	return 0;
+	return KEYS_MAPPING[buffer[bufferPlace-2]] - '0';
 }
 
 char getCharFromBuffer(void) {
-	if(bufferPlace > 0) {
-		return buffer[bufferPlace-1];
+	if(bufferRead == bufferPlace) {
+		return 0;
+	} else {
+		bufferRead++;
+		return KEYS_MAPPING[buffer[bufferRead-1]];
 	}
-	return 0;
 }
 
 void clearBuffer(void) {
@@ -152,4 +161,6 @@ void clearBuffer(void) {
 		buffer[i] = 0;
 	}
 	bufferPlace = 0;
+	bufferRead = 0;
+	bufferConsumed = 0;
 }

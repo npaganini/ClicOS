@@ -56,7 +56,7 @@ void * initializeKernelBinary()
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress,
-		dummyModuleAddress
+		// dummyModuleAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
@@ -163,7 +163,7 @@ int main()
 	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
 
 	EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
-	EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
+	// EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
 
 	loading();
 
@@ -183,15 +183,11 @@ int main()
 	setPicSlave(0xEF);
 	sti();
 
+	clearScreen();
+
 	// change();
-		clearScreen();
 	do {
-// 		// char aux[2] = {0};
-// 		displayModuleMsg();
-// 		while(getCharFromBuffer() != '\n');
 // 		option = getOption() - '0';
-// 		clearBuffer();
-// 		switch(option) {
 // 			case 1:
 // 				clearScreen();
 // 				// map_page(sampleCodeModuleAddress);
@@ -205,6 +201,30 @@ int main()
 // 			default:
 // 				break;
 // 		}
+
+
+		// char aux[2] = {0};
+		displayModuleMsg();
+		while(getCharFromBuffer() != '\n');
+		option = getOption();
+		clearBuffer();
+		switch(option) {
+			case 1:
+				clearScreen();
+				// printOnScreen("Opcion 1");
+				// map_page(sampleCodeModuleAddress);
+				option = sampleCodeModule();
+				break;
+			case 2:
+				clearScreen();
+				// printOnScreen("Opcion 2");
+				// map_page(dummyModuleAddress);
+				// option = dummyModule();
+				break;
+			default:
+				printOnScreen("Not a module\n");
+				break;
+		}
 	} while(1);
 
 	return 0;

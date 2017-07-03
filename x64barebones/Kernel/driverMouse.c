@@ -147,11 +147,9 @@ void printCursor(uint8_t mouseCoord_x, uint8_t mouseCoord_y, char leftClick) {
         leftStart_y = aux_y;
       }
 //      position[1] = MOUSE;
-          cpyToBuffer(vidStartM + ((aux_x*COLS + aux_y)*2));
-          draw_pixel(aux_x, aux_y, 0x90);
-
+      cpyToBuffer(vidStartM + ((aux_x*COLS + aux_y)*2));
+      draw_pixel(aux_x, aux_y, 0x90);
     }
-  
     mouse_x = aux_x;
     mouse_y = aux_y;
 //    position[1] = 0x81;
