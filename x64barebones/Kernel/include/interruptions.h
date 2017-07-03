@@ -9,8 +9,6 @@
 
 // #define TIMER 100000000000
 
-
-
 void iSetHandler(int index, uint64_t handler);
 void setIDT();
 void sti();
@@ -40,10 +38,6 @@ void keyboard_handler(void);
 void mouse_handler(void);
 void systemCallHandler(int instruction, char * s, int sSize);
 void initialize_Mouse(void);
-void rewrite_CR3(void);
-void displayModuleMsg(void);
-int getOptionFromBuffer(void);
-void change(void);
 // void map_page(void * physicalAddress, void * virtualAddress);
 void map_page(uint64_t physicalAddress);
 

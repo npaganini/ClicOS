@@ -7,6 +7,10 @@ int printf(char * s) {
 
 int scanf(char * s) {
 	read(s, 0);
+	// *(s+0) = 'h';
+	// *(s+1) = 'e';
+	// *(s+2) = 'l';
+	// *(s+3) = 'p';
 	return 0;
 }
 
@@ -37,4 +41,5 @@ int strcmp(char * s1, char * s2) {
 
 void showTime(void) {
 	time();
+	printf("\n");
 }

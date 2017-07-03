@@ -47,6 +47,7 @@ void systemCallHandler(int instruction, char * s, int sSize) {
 	// printOnScreen("LLEGUE");
 	switch(instruction) {
 		case TIME:
+			printOnScreen("La hora es: ");
 			displayTime();
 			break;
 		case READ:

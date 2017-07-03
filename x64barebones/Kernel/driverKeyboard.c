@@ -20,6 +20,7 @@ static char SHIFT_KEYS_MAPPING[] = {0, 'ESC', '!', '\0', '#', '$', '%', '&', '/'
 static int mayus = 0;
 static int bufferPlace = 0;
 static uint64_t buffer[ROWS*COLS] = {0};
+static char ans;
 // buffer[bufferPlace] = 28;
 // bufferPlace++;
 
@@ -95,68 +96,62 @@ void cpyToBuffer(char * s) {
 	}
 }
 
-void cpyFromBuffer(char * s) {
-	int i = 0;
-	int j = 0;
-	// char auxCopy[30] = {0};
-	do {
-		if(bufferPlace - i - 2 >= 0) {
-			auxCopy[i] = KEYS_MAPPING[buffer[bufferPlace - i -2]];
-			buffer[bufferPlace - i - 2] = 0;
-			i++;
-		}
-		if(i > 49) {
-			return;
-		}
-	} while(bufferPlace - i - 2 >= 0 && buffer[bufferPlace - i -2] != 28);
-	i--;
-	while(i >= 0) {
-		*(s+j) = auxCopy[i];
-		i--;
-		j++;
-	}
-	*(s+j) = 0;
-	for(i = 0; i < 30; i++) {
-		auxCopy[i] = 0;
-	}
+void cpyFromBuffer(char * s) {				// FIX THIS
+	// int i = 0;
+	// int j = 0;
+	// // char auxCopy[30] = {0};
+	// buffer[bufferPlace] = 0;
+	// buffer[bufferPlace - 1] = 0;
+	// do {
+	// 	if(bufferPlace - i - 2 >= 0) {
+	// 		auxCopy[i] = KEYS_MAPPING[buffer[bufferPlace - i -2]];
+	// 		buffer[bufferPlace - i - 2] = 0;
+	// 		i++;
+	// 	}
+	// 	if(i > 49) {
+	// 		return;
+	// 	}
+	// } while(bufferPlace - i - 2 >= 0 && buffer[bufferPlace - i -2] != 28);
+	// if(bufferPlace - i >= 0) {
+	// 	bufferPlace -= i;
+	// } else {
+	// 	int j = bufferPlace - i;
+	// 	bufferPlace = ROWS*COLS;
+	// 	bufferPlace += j;
+	// }
+	// i--;
+	// if(bufferPlace + 1 == ROWS*COLS) {
+	// 	bufferPlace = 0;
+	// } else {
+	// 	bufferPlace++;
+	// }
+	// while(i >= 0) {
+	// 	*(s+j) = auxCopy[i];
+	// 	i--;
+	// 	j++;
+	// }
+	// *(s+j) = 0;
+	// for(i = 0; i < 30; i++) {
+	// 	auxCopy[i] = 0;
+	// }
 }
 
-// void cpyFromBuffer(char * s) {
-// 	int i = 0;
-// 	int j = 0;
-// 	// printOnScreen("Arranca el copy ");
-// 	do {
-// 		auxCopy[i] = buffer[bufferPlace - i];
-// 		i++;
-// 		// if(i > 49) {
-// 		// 	return;
-// 		// }
-// 	} while(buffer[bufferPlace - i] != 28);
-// 	i--;
-// 	while(i > 0) {
-// 		*(s+j) = auxCopy[i];
-// 		i--;
-// 		j++;
-// 	}
-// 	// printOnScreen("Hace el copy ");
-// 	*(s+j) = 0;
-// 	for(i = 0; i < 50; i++) {
-// 		auxCopy[i] = 0;
-// 	}
-// 	// printOnScreen("Termina el copy ");
-// }
-
-int getOption(void) {
-	if(bufferPlace > 0) {
-		return KEYS_MAPPING[buffer[bufferPlace-2]] - '0';
-	}
+int getOption(void) {							// FIX THIS
+	// if(bufferPlace > 0) {
+	// 	printOnScreenChar(KEYS_MAPPING[buffer[bufferPlace-2]]);
+	// 	return KEYS_MAPPING[buffer[bufferPlace-2]];
+	// }
 	return 0;
 }
 
-char getCharFromBuffer(void) {
-	if(bufferPlace > 0) {
-		return (char) KEYS_MAPPING[(int) buffer[bufferPlace-1]];
-	}
+char getCharFromBuffer(void) {					// FIX THIS
+	// if(bufferPlace > 0) {
+	// 	if(buffer[bufferPlace-1] == 28) {
+	// 		return '\n';
+	// 	} else {
+	// 		return KEYS_MAPPING[buffer[bufferPlace-1]];
+	// 	}
+	// }
 	return 0;
 }
 

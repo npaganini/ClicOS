@@ -7,14 +7,15 @@ int shell(void) {
 	int exit = 0;
 	while(!exit) {
 		printf("[SCM]$ ");
-		while(getChar() != '\n');
+		// printf(buffer);
+		while(getChar() != '\n');	// despues de la primera pasada it's always true?
+		// printf(buffer);
 		getInput();
 		// printf(buffer);
 		exit = processCommand();
-		clearShellBuffer();
-		if(exit) {
-			printf("Cerrando modulo.\n");
-		}
+		printf(buffer);
+		// clearShellBuffer();	// me escribe SMC e imprime el msg de help (ver scanf)
+		printf(buffer);
 	}
 	return exit;
 }
@@ -25,23 +26,17 @@ void getInput(void) {
 
 int processCommand(void) {
 	// maquina de estados o varios strcmp
-	// printf(buffer);
 	if(strcmp(buffer, "help")) {
 		helpMenu();
-		// printf("HELP\n");
 		return 0;
 	} else if(strcmp(buffer, "null")) {
 		clear();
-		// printf("CLEAR\n");
 		return 0;
 	} else if(strcmp(buffer, "time")) {
-		// printf("TIME\n");
 		showCurrTime();
 		return 0;
 	} else if(strcmp(buffer, "exit")) {
-		// printf("EXIT\n");
 		return 1;
-	// } else if(echo((char *) strcmp(buffer, "echo"))) {
 	} else {
 		int i;
 		char aux[4];
@@ -51,7 +46,7 @@ int processCommand(void) {
 		if(strcmp(aux, "echo")) {
 			echo(buffer+5);
 		} else {
-			printf("Comando no reconocido.");
+			printf("Comando no reconocido.\n");
 		}
 	}
 	return 0;
@@ -76,6 +71,7 @@ void showCurrTime(void) {
 
 void echo(char * s) {
 	printf(s);
+	printf("\n");
 }
 
 void clearShellBuffer(void) {

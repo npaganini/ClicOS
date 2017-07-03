@@ -22,10 +22,9 @@ static const uint64_t PageSize = 0x1000;
 
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
-static void * const userGuestModuleAddress = (void*)0x600000;
+static void * const dummyModuleAddress = (void*)0x600000;
 
 typedef int (*EntryPoint)();
-void loading(void);
 
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
@@ -57,7 +56,7 @@ void * initializeKernelBinary()
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress,
-		// userGuestAddress
+		dummyModuleAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
@@ -101,18 +100,14 @@ int PDIndex = 2;
 
 void map_page(uint64_t physicalAddress)
 {
-    
     //Si yo quisiera poner esta pagina presente....
  //	PD[PDIndex] |= 0x1;
-
-
 	uint64_t mask = 0xFFF00000001FFFFF;
 	uint64_t aux = PD[PDIndex] & mask;
 	PD[PDIndex] =  aux | (physicalAddress & ~0x1FFFFF);
 	//reescribir el cr3 	
 	// mov rax, cr3 ; mov cr3, rax
 	rewrite_CR3();
-
 }
 // map_page(0x800000);
 
@@ -137,7 +132,7 @@ void map_page(uint64_t physicalAddress)
 void displayModuleMsg(void) {
 	printOnScreen("Please select the module to run:\n");
 	printOnScreen("1: Sample Code Module\n");
-	printOnScreen("2: User Guest Module\n");
+	printOnScreen("2: Dummy Module\n");
 }
 
 int main()
@@ -168,7 +163,7 @@ int main()
 	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
 
 	EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
-	// EntryPoint userGuestModule = (EntryPoint) userGuestModuleAddress;
+	EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
 
 	loading();
 
@@ -177,7 +172,6 @@ int main()
 
 	// welcome message
 	welcomeMessage();
-	clearScreen();
 
 	// set IDT
 	// set interruption (IDT) handlers
@@ -190,25 +184,23 @@ int main()
 	sti();
 
 	// change();
+		clearScreen();
 	do {
-		char aux[2] = {0};
+		// char aux[2] = {0};
 		displayModuleMsg();
-		while(getCharFromBuffer() != '\n') {
-			// aux[0] = getCharFromBuffer();
-			// printOnScreen(aux);
-		}
-		option = getOption();
-		// aux[0] = option + '0';
+		while(getCharFromBuffer() != '\n');
+		option = getOption() - '0';
 		clearBuffer();
 		switch(option) {
 			case 1:
 				clearScreen();
+				// map_page(sampleCodeModuleAddress);
 				option = sampleCodeModule();
-				// while(1);
 				break;
 			case 2:
 				clearScreen();
-				// option = userGuestModule();
+				map_page(dummyModuleAddress);
+				option = dummyModule();
 				break;
 			default:
 				printOnScreen("Not a module\n");
