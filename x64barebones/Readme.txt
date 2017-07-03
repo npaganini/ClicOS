@@ -29,3 +29,8 @@ From the x64BareBones project directory run:
 
 Author: Rodrigo Rearden (RowDaBoat)
 Collaborator: Augusto Nizzo McIntosh
+
+Project Collaborators:
+Balfour, Oliver
+Kramer, Esteban
+Paganini, Nicolas
