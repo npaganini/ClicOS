@@ -186,26 +186,25 @@ int main()
 	// change();
 		clearScreen();
 	do {
-		// char aux[2] = {0};
-		displayModuleMsg();
-		while(getCharFromBuffer() != '\n');
-		option = getOption() - '0';
-		clearBuffer();
-		switch(option) {
-			case 1:
-				clearScreen();
-				// map_page(sampleCodeModuleAddress);
-				option = sampleCodeModule();
-				break;
-			case 2:
-				clearScreen();
-				map_page(dummyModuleAddress);
-				option = dummyModule();
-				break;
-			default:
-				printOnScreen("Not a module\n");
-				break;
-		}
+// 		// char aux[2] = {0};
+// 		displayModuleMsg();
+// 		while(getCharFromBuffer() != '\n');
+// 		option = getOption() - '0';
+// 		clearBuffer();
+// 		switch(option) {
+// 			case 1:
+// 				clearScreen();
+// 				// map_page(sampleCodeModuleAddress);
+// 				option = sampleCodeModule();
+// 				break;
+// 			case 2:
+// 				clearScreen();
+// 				map_page(dummyModuleAddress);
+// 				option = dummyModule();
+// 				break;
+// 			default:
+// 				break;
+// 		}
 	} while(1);
 
 	return 0;

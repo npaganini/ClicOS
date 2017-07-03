@@ -21,8 +21,6 @@ static int mayus = 0;
 static int bufferPlace = 0;
 static uint64_t buffer[ROWS*COLS] = {0};
 static char ans;
-// buffer[bufferPlace] = 28;
-// bufferPlace++;
 
 void keyboard_handler(void) {
 	uint64_t keycode;
@@ -136,22 +134,15 @@ void cpyFromBuffer(char * s) {				// FIX THIS
 	// }
 }
 
-int getOption(void) {							// FIX THIS
-	// if(bufferPlace > 0) {
-	// 	printOnScreenChar(KEYS_MAPPING[buffer[bufferPlace-2]]);
-	// 	return KEYS_MAPPING[buffer[bufferPlace-2]];
-	// }
+int getOption(void) {
+	if()
 	return 0;
 }
 
-char getCharFromBuffer(void) {					// FIX THIS
-	// if(bufferPlace > 0) {
-	// 	if(buffer[bufferPlace-1] == 28) {
-	// 		return '\n';
-	// 	} else {
-	// 		return KEYS_MAPPING[buffer[bufferPlace-1]];
-	// 	}
-	// }
+char getCharFromBuffer(void) {
+	if(bufferPlace > 0) {
+		return buffer[bufferPlace-1];
+	}
 	return 0;
 }
 
