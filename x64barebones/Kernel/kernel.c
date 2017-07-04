@@ -217,7 +217,6 @@ int main()
 				break;
 			case 2:
 				clearScreen();
-				printOnScreen("Opcion Dummy -");		// Entra bien.
 				map_page(dummyModuleAddress);
 				break;
 			default:
