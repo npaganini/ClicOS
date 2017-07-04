@@ -23,6 +23,7 @@ static const uint64_t PageSize = 0x1000;
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
 static void * const dummyModuleAddress = 	  (void*)0x600000;
+static void * const runnerModuleAddress =	  (void*)0x700000;
 
 typedef int (*EntryPoint)();
 
@@ -56,7 +57,8 @@ void * initializeKernelBinary()
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress,
-		dummyModuleAddress
+		dummyModuleAddress,
+		runnerModuleAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
@@ -112,7 +114,8 @@ void map_page(uint64_t physicalAddress)
 	// memcpy(userland, sampleCodeModuleAddress, 0x200000);
 	// void map(void * fisica, void * module){
 	// 	memcpy(fisica,module,10000);
-	memcpy(0x800000, physicalAddress, 10000);
+	// memcpy(0x600000, physicalAddress, 10000);		// Corre siempre SCM!
+	memcpy(runnerModuleAddress, physicalAddress, PageSize*3);
 	// 	*((uint64_t *)entry) = fisica;
 	// }
 
@@ -148,6 +151,10 @@ void displayModuleMsg(void) {
 
 int main()
 {
+
+// sudo fdisk -l
+// sudo dd if=x64BareBonesImage.img of=/dev/sdb
+
 	/*/
 	ncPrint("[Kernel Main]");
 	ncNewline();
@@ -171,8 +178,9 @@ int main()
 
 	int option = 0;
 
-	EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
-	EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
+	// EntryPoint sampleCodeModule = (EntryPoint) sampleCodeModuleAddress;
+	// EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
+	EntryPoint runner = (EntryPoint) runnerModuleAddress;
 
 	loading();
 
@@ -205,17 +213,17 @@ int main()
 			case 1:
 				clearScreen();
 				map_page(sampleCodeModuleAddress);
-				option = sampleCodeModule();
 				break;
 			case 2:
 				clearScreen();
+				printOnScreen("Opcion Dummy -");		// Entra bien.
 				map_page(dummyModuleAddress);
-				option = dummyModule();
 				break;
 			default:
 				printOnScreen("Not a module\n");
 				break;
 		}
+		option = runner();
 		printOnScreen("\n");
 	} while(1);
 

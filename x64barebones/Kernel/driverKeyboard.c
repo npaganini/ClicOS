@@ -22,7 +22,6 @@ static int bufferPlace = 0;
 static int bufferRead = 0;
 static int bufferConsumed = 0;
 static uint64_t buffer[ROWS*COLS] = {0};
-static char ans;
 
 void keyboard_handler(void) {
 	uint64_t keycode;
