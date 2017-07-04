@@ -20,6 +20,8 @@ extern uint8_t endOfKernel;
 
 static const uint64_t PageSize = 0x1000;
 
+int timer = 0;
+
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
 static void * const dummyModuleAddress = 	  (void*)0x600000;
@@ -57,8 +59,7 @@ void * initializeKernelBinary()
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress,
-		dummyModuleAddress,
-		runnerModuleAddress
+		dummyModuleAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
@@ -91,9 +92,9 @@ void * initializeKernelBinary()
 }
 
 void loading(void) {
-	long timer = TIMER;
-	while(timer) {
-		timer--;
+	timer = TIMER;
+	while(timer >= 0) {
+		;
 	}
 }
 
@@ -182,7 +183,7 @@ int main()
 	// EntryPoint dummyModule = (EntryPoint) dummyModuleAddress;
 	EntryPoint runner = (EntryPoint) runnerModuleAddress;
 
-	loading();
+	// loading();
 
 	// print black screen
 	clearScreen();

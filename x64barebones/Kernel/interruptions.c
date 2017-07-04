@@ -33,6 +33,7 @@ void iSetHandler(int index, uint64_t handler) {
 
 void tickHandler() {
 	// Here would go (jump to the interrupt attention routine) the Scheduler to swap between tasks to run. Not part of this project.
+	timer--;
 }
 
 void keyboardHandler() {

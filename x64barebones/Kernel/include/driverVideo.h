@@ -6,7 +6,7 @@
 #define ROWS 25
 #define COLS 80
 
-#define TIMER 100000000
+#define TIMER 1
 #define CENTERED 54
 #define CENTEREDCLICOS 20
 #define MAX_INT 20

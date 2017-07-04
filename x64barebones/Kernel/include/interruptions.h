@@ -7,6 +7,8 @@
 #define READ  1
 #define WRITE 2
 
+extern int timer;
+
 // #define TIMER 100000000000
 
 void iSetHandler(int index, uint64_t handler);
